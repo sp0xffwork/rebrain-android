@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
 
         // если sdk < 19, то fullscreen. в остальных случаях прозрачный Status Bar заданный в настройках стиля
-        if (Build.VERSION.SDK_INT in 16 until 19) {
+        if (Build.VERSION.SDK_INT < 19) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         }
 

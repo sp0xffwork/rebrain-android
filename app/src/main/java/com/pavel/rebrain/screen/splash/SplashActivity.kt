@@ -1,10 +1,14 @@
 package com.pavel.rebrain.screen.splash
 
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.pavel.rebrain.R
+import com.pavel.rebrain.screen.intro.IntroActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -29,6 +33,12 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
 
         launch {
             delay(500)
+            val prefs = PreferenceManager.getDefaultSharedPreferences(this@SplashActivity)
+            val isNeedShowIntro = prefs.getBoolean("is_need_show_intro", true)
+            if (isNeedShowIntro) {
+                startActivity(Intent(this@SplashActivity, IntroActivity::class.java))
+                prefs.edit().putBoolean("is_need_show_intro", false).apply()
+            }
             finish()
         }
     }

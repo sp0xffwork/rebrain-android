@@ -13,6 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import util.PreferenceHelper
 import kotlin.coroutines.CoroutineContext
 
 
@@ -33,11 +34,10 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
 
         launch {
             delay(500)
-            val prefs = PreferenceManager.getDefaultSharedPreferences(this@SplashActivity)
-            val isNeedShowIntro = prefs.getBoolean("is_need_show_intro", true)
+            val isNeedShowIntro = PreferenceHelper.getBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO)
             if (isNeedShowIntro) {
-                startActivity(Intent(this@SplashActivity, IntroActivity::class.java))
-                prefs.edit().putBoolean("is_need_show_intro", false).apply()
+                IntroActivity.start(this@SplashActivity)
+                PreferenceHelper.putBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO, false)
             }
             finish()
         }

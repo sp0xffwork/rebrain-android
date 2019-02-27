@@ -17,7 +17,7 @@
     <style name="TransparentStatusBarActivityTheme" parent="AppTheme.NoActionBar" />
 
     <!-- App theme without Action Bar + Transparent Status Bar + Translucent Navigation -->
-    <style name="TranslucentNavigationTransparentStatusBarActivityTheme" parent="TransparentStatusBarActivityTheme"/>
+    <style name="TranslucentNavigationTransparentStatusBarActivityTheme" parent="TransparentStatusBarActivityTheme" />
 
     <style name="SplashActivityTheme" parent="TranslucentNavigationTransparentStatusBarActivityTheme">
         <item name="android:windowBackground">@drawable/backgroundsplash</item>
@@ -25,6 +25,24 @@
 
     <style name="IntroActivityTheme" parent="TransparentStatusBarActivityTheme">
         <item name="android:windowBackground">@color/colorIntroBackground</item>
+    </style>
+
+    <style name="IntroActivityText">
+        <item name="android:textColor">@color/colorIntroText</item>
+    </style>
+
+    <style name="IntroActivityText.Primary">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">0sp</item>
+    </style>
+
+    <style name="IntroActivityText.Secondary">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">7sp</item>
     </style>
 
 </resources>

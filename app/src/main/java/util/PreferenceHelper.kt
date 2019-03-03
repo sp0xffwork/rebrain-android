@@ -3,18 +3,26 @@ package util
 import android.content.Context
 import android.preference.PreferenceManager
 
-class PreferenceHelper {
-    companion object {
-        val IS_NEED_SHOW_INTRO = "is_need_show_intro"
+/**
+ * Утилитный класс для удобной работы с Shared Preferences
+ */
+object PreferenceHelper {
 
-        fun getBoolean(context: Context, key: String, default: Boolean = true): Boolean {
-            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-            return prefs.getBoolean(key, default)
-        }
+    val IS_NEED_SHOW_INTRO = "is_need_show_intro"
 
-        fun putBoolean(context: Context, key: String, value: Boolean) {
-            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-            prefs.edit().putBoolean(key, value).apply()
-        }
+    /**
+     * @return boolean значение ключа [key]
+     */
+    fun getBoolean(context: Context, key: String, default: Boolean = true): Boolean {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getBoolean(key, default)
+    }
+
+    /**
+     * Сохраняет boolean значение [value] ключа [key]
+     */
+    fun putBoolean(context: Context, key: String, value: Boolean) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        prefs.edit().putBoolean(key, value).apply()
     }
 }

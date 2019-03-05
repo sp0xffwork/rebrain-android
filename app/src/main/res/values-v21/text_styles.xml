@@ -1,31 +1,11 @@
 <resources>
 
-    <style name="RegularFont">
-        <item name="android:fontFamily">sans-serif</item>
+    <style name="RegularFont.Bold.22.White.LnSpEx0.LtSp001">
+        <item name="android:letterSpacing">0.01</item>
     </style>
 
-    <style name="LightFont">
-        <item name="android:fontFamily">sans-serif-light</item>
-    </style>
-
-    <style name="BoldRegularFont" parent="RegularFont">
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="NormalLightFont" parent="RegularFont">
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="IntroActivityPrimaryText" parent="BoldRegularFont">
-        <item name="android:textColor">@color/colorIntroText</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
-    </style>
-
-    <style name="IntroActivitySecondaryText" parent="NormalLightFont">
-        <item name="android:textColor">@color/colorIntroText</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:lineSpacingExtra">0sp</item>
+    <style name="LightFont.Normal.16.White.LnSpEx0.LtSp003">
+        <item name="android:letterSpacing">0.03</item>
     </style>
 
 </resources>

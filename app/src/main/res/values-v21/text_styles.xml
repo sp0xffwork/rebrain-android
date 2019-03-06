@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="RegularFont.Bold.22.White.LnSpEx0.LtSp001">
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="LightFont.Normal.16.White.LnSpEx0.LtSp003">
+        <item name="android:letterSpacing">0.03</item>
+    </style>
+
+</resources>

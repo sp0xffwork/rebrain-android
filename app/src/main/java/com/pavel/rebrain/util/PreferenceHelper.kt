@@ -1,4 +1,4 @@
-package util
+package com.pavel.rebrain.util
 
 import android.content.Context
 import android.preference.PreferenceManager

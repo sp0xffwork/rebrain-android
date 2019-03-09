@@ -1,10 +1,7 @@
 package com.pavel.rebrain.screen.splash
 
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.pavel.rebrain.R
@@ -13,7 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import util.PreferenceHelper
+import com.pavel.rebrain.util.PreferenceHelper
+import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
 
@@ -24,6 +22,8 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Timber.tag("FoodApp").d("SplashActivity.onCreate")
 
         // если sdk < 19, то fullscreen. в остальных случаях прозрачный Status Bar заданный в настройках стиля
         if (Build.VERSION.SDK_INT < 19) {

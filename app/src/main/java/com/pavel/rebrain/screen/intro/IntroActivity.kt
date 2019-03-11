@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.pavel.rebrain.R
+import timber.log.Timber
 
 class IntroActivity : AppCompatActivity() {
 
@@ -19,11 +20,38 @@ class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        Timber.tag("FoodApp").i("IntroActivity.onCreate")
+
         // если sdk < 19, то fullscreen. в остальных случаях прозрачный Status Bar заданный в настройках стиля
         if (Build.VERSION.SDK_INT < 19) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         }
 
         setContentView(R.layout.activity_intro)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Timber.tag("FoodApp").i("IntroActivity.onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Timber.tag("FoodApp").i("IntroActivity.onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.tag("FoodApp").i("IntroActivity.onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.tag("FoodApp").i("IntroActivity.onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.tag("FoodApp").i("IntroActivity.onDestroy")
     }
 }

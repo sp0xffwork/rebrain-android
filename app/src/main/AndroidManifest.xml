@@ -23,8 +23,7 @@
 
         <activity
             android:name=".screen.intro.IntroActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/IntroActivityTheme"></activity>
+            android:theme="@style/IntroActivityTheme" />
 
     </application>
 

@@ -15,6 +15,9 @@ import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
 
+/**
+ * Splash-экран приложения
+ */
 class SplashActivity : AppCompatActivity(), CoroutineScope {
 
     override val coroutineContext: CoroutineContext

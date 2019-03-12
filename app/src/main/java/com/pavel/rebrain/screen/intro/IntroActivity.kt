@@ -9,6 +9,9 @@ import android.view.View
 import com.pavel.rebrain.R
 import timber.log.Timber
 
+/**
+ * Интро-экран приложения
+ */
 class IntroActivity : AppCompatActivity() {
 
     companion object {

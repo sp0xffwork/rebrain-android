@@ -15,6 +15,9 @@ import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
 
+/**
+ * Splash-экран приложения
+ */
 class SplashActivity : AppCompatActivity(), CoroutineScope {
 
     override val coroutineContext: CoroutineContext
@@ -23,7 +26,7 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Timber.tag("FoodApp").d("SplashActivity.onCreate")
+        Timber.tag("FoodApp").i("SplashActivity.onCreate")
 
         // если sdk < 19, то fullscreen. в остальных случаях прозрачный Status Bar заданный в настройках стиля
         if (Build.VERSION.SDK_INT < 19) {
@@ -34,12 +37,39 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
 
         launch {
             delay(500)
-            val isNeedShowIntro = PreferenceHelper.getBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO)
+            // временно. для того, чтобы выполнить задание на IntroActivity
+            // TODO убрать в следующем задании
+            val isNeedShowIntro = true; //PreferenceHelper.getBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO)
             if (isNeedShowIntro) {
                 IntroActivity.start(this@SplashActivity)
                 PreferenceHelper.putBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO, false)
             }
             finish()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Timber.tag("FoodApp").i("SplashActivity.onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Timber.tag("FoodApp").i("SplashActivity.onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.tag("FoodApp").i("SplashActivity.onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.tag("FoodApp").i("SplashActivity.onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.tag("FoodApp").i("SplashActivity.onDestroy")
     }
 }

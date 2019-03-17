@@ -5,6 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorIntroBackground">#5bd056</color>
     <color name="colorIntroText">#ffffff</color>
+    <color name="colorMainBackground">#f9fafe</color>
+    <color name="colorMainText">#000</color>
     <color name="textColorSecondary">#000000</color>
     <color name="colorBackground">#f9fafe</color>
 </resources>

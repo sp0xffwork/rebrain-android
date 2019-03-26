@@ -48,8 +48,8 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
                 MainActivity.start(this@SplashActivity)
             }
 
-            // переход к IntroActivity или MainActivity без возмодности возврата
-            finishAffinity()
+            // переход к IntroActivity или MainActivity без возможности возврата
+            finish()
         }
     }
 

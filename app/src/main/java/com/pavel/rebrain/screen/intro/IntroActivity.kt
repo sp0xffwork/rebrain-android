@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.main.MainActivity
+import kotlinx.android.synthetic.main.activity_intro.*
 import timber.log.Timber
 
 /**
@@ -34,12 +35,11 @@ class IntroActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_intro)
 
-        findViewById<ImageView>(R.id.imageTop).setOnClickListener {
+        imageTop.setOnClickListener {
             MainActivity.start(this@IntroActivity)
-            // переход к MainActivity без возмодности возврата
+            // переход к MainActivity без возможности возврата
             finishAffinity()
         }
-
     }
 
     override fun onStart() {

@@ -6,6 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.pavel.rebrain.R
 
+/**
+ * Главный экран приложения
+ */
 class MainActivity : AppCompatActivity() {
 
     companion object {

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.intro.IntroActivity
+import com.pavel.rebrain.screen.main.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -43,7 +44,11 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
             if (isNeedShowIntro) {
                 IntroActivity.start(this@SplashActivity)
                 PreferenceHelper.putBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO, false)
+            } else {
+                MainActivity.start(this@SplashActivity)
             }
+
+            // переход к IntroActivity или MainActivity без возможности возврата
             finish()
         }
     }

@@ -22,8 +22,11 @@
         </activity>
 
         <activity
+            android:taskAffinity="com.pavel.rebrain.task.intro"
             android:name=".screen.intro.IntroActivity"
             android:theme="@style/IntroActivityTheme" />
+
+        <activity android:name=".screen.main.MainActivity" />
 
     </application>
 

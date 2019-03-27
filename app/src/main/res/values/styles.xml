@@ -21,4 +21,8 @@
         <item name="android:windowBackground">@color/colorIntroBackground</item>
     </style>
 
+    <style name="MainActivityTheme" parent="TransparentStatusBarActivityTheme">
+        <item name="android:windowBackground">@color/colorMainBackground</item>
+    </style>
+
 </resources>

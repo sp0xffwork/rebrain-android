@@ -1,102 +1,94 @@
 package com.pavel.rebrain.screen.main.carousel
 
 import android.content.Context
-import android.net.Uri
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.pavel.rebrain.R
+import kotlinx.android.synthetic.main.fragment_carousel.*
+import timber.log.Timber
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM_PICTURE_NAME = "picture_name"
 
 /**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [CarouselFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [CarouselFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
+ * CarouselFragment
+ * [CarouselFragment.newInstance] factory method
  */
 class CarouselFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    private var pictureName: String? = null
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        Timber.tag("FoodApp").i("CarouselFragment.onAttach. picture=${pictureName}")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            pictureName = it.getString(ARG_PARAM_PICTURE_NAME)
         }
+        Timber.tag("FoodApp").i("CarouselFragment.onCreate. picture=${pictureName}")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        Timber.tag("FoodApp").i("CarouselFragment.onCreateView. picture=${pictureName}")
         return inflater.inflate(R.layout.fragment_carousel, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        pictureName?.let {
+            image.setImageDrawable(Drawable.createFromStream(activity!!.assets.open(it), null))
+        }
+        Timber.tag("FoodApp").i("CarouselFragment.onActivityCreated. picture=${pictureName}")
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
+    override fun onStart() {
+        super.onStart()
+        Timber.tag("FoodApp").i("CarouselFragment.onStart. picture=${pictureName}")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Timber.tag("FoodApp").i("CarouselFragment.onResume. picture=${pictureName}")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.tag("FoodApp").i("CarouselFragment.onPause. picture=${pictureName}")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.tag("FoodApp").i("CarouselFragment.onStop. picture=${pictureName}")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Timber.tag("FoodApp").i("CarouselFragment.onDestroyView. picture=${pictureName}")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.tag("FoodApp").i("CarouselFragment.onDestroy. picture=${pictureName}")
     }
 
     override fun onDetach() {
         super.onDetach()
-        listener = null
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        Timber.tag("FoodApp").i("CarouselFragment.onDetach. picture=${pictureName}")
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CarouselFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(pictureName: String?) =
             CarouselFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_PARAM_PICTURE_NAME, pictureName)
                 }
             }
     }

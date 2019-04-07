@@ -25,13 +25,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val arrayOfPictures =
-            arrayOf("1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg")
+        val arrayOfPictureResIds =
+            arrayOf(
+                R.drawable.pic_1,
+                R.drawable.pic_2,
+                R.drawable.pic_3,
+                R.drawable.pic_4,
+                R.drawable.pic_5,
+                R.drawable.pic_6,
+                R.drawable.pic_7,
+                R.drawable.pic_8,
+                R.drawable.pic_9,
+                R.drawable.pic_10
+            )
 
-        val pagerAdapter = CarouselFragmentPagerAdapter(supportFragmentManager)
-        pagerAdapter.setPicturesArray(arrayOfPictures)
-        val statePagerAdapter = CarouselFragmentStatePagerAdapter(supportFragmentManager)
-        statePagerAdapter.setPicturesArray(arrayOfPictures)
+        val pagerAdapter = CarouselFragmentPagerAdapter(supportFragmentManager, arrayOfPictureResIds)
+        val statePagerAdapter = CarouselFragmentStatePagerAdapter(supportFragmentManager, arrayOfPictureResIds)
 
         pager.adapter = pagerAdapter
         //pager.adapter = statePagerAdapter

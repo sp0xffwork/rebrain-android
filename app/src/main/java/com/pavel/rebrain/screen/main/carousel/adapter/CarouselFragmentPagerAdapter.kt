@@ -10,14 +10,8 @@ import com.pavel.rebrain.screen.main.carousel.CarouselFragment
 /**
  * A pager adapter
  */
-class CarouselFragmentPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class CarouselFragmentPagerAdapter(fm: FragmentManager, private var pictures: Array<Int>) : FragmentPagerAdapter(fm) {
 
-    var pictures: Array<String>? = null
-
-    fun setPicturesArray(pictures: Array<String>) {
-        this.pictures = pictures
-    }
-
-    override fun getCount(): Int = pictures?.size ?: 0
+    override fun getCount(): Int = pictures.size
     override fun getItem(position: Int): Fragment = CarouselFragment.newInstance(pictures?.get(position))
 }

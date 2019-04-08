@@ -10,7 +10,8 @@ import androidx.fragment.app.Fragment
 import timber.log.Timber
 
 /**
- * Base Gtagment class.
+ * Base Fragment class.
+ * Логирует жизненный цикл фрагмента.
  *
  */
 open class BaseFragment : Fragment() {

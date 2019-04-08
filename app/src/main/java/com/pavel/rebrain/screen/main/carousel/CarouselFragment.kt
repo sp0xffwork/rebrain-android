@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_carousel.*
@@ -42,9 +43,7 @@ class CarouselFragment : BaseFragment() {
     companion object {
         fun newInstance(pictureResId: Int) =
             CarouselFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_PARAM_PICTURE_RES_ID, pictureResId)
-                }
+                arguments = bundleOf(ARG_PARAM_PICTURE_RES_ID to pictureResId)
             }
     }
 }

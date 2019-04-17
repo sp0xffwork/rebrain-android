@@ -2,18 +2,21 @@ package com.pavel.rebrain.screen.main
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.main.carousel.adapter.CarouselFragmentPagerAdapter
 import com.pavel.rebrain.screen.main.carousel.adapter.CarouselFragmentStatePagerAdapter
+import com.pavel.rebrain.screen.main.tabs.MainTabFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 
 
 /**
  * Главный экран приложения
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainTabFragment.OnFragmentInteractionListener {
 
     companion object {
         fun start(context: Context) {
@@ -25,24 +28,44 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val arrayOfPictureResIds =
-            arrayOf(
-                R.drawable.pic_1,
-                R.drawable.pic_2,
-                R.drawable.pic_3,
-                R.drawable.pic_4,
-                R.drawable.pic_5,
-                R.drawable.pic_6,
-                R.drawable.pic_7,
-                R.drawable.pic_8,
-                R.drawable.pic_9,
-                R.drawable.pic_10
-            )
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, MainTabFragment.newInstance(), "MainTabFragment")
+                .commit()
+        }
 
-        val pagerAdapter = CarouselFragmentPagerAdapter(supportFragmentManager, arrayOfPictureResIds)
-        val statePagerAdapter = CarouselFragmentStatePagerAdapter(supportFragmentManager, arrayOfPictureResIds)
+        Timber.tag("FoodApp").i("MainActivity.onCreate")
 
-        pager.adapter = pagerAdapter
-        //pager.adapter = statePagerAdapter
     }
+
+    override fun onFragmentInteraction(uri: Uri) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Timber.tag("FoodApp").i("MainActivity.onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Timber.tag("FoodApp").i("MainActivity.onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.tag("FoodApp").i("MainActivity.onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.tag("FoodApp").i("MainActivity.onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.tag("FoodApp").i("SplashActivity.onDestroy")
+    }
+
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.pavel.rebrain.R
+import com.pavel.rebrain.screen.base.BaseActivity
 import com.pavel.rebrain.screen.intro.IntroActivity
 import com.pavel.rebrain.screen.main.MainActivity
 import kotlinx.coroutines.CoroutineScope
@@ -19,15 +20,13 @@ import kotlin.coroutines.CoroutineContext
 /**
  * Splash-экран приложения
  */
-class SplashActivity : AppCompatActivity(), CoroutineScope {
+class SplashActivity : BaseActivity("SplashActivity"), CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Default
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Timber.tag("FoodApp").i("SplashActivity.onCreate")
 
         setContentView(R.layout.activity_splash)
 
@@ -52,30 +51,5 @@ class SplashActivity : AppCompatActivity(), CoroutineScope {
             // переход к IntroActivity или MainActivity без возможности возврата
             finish()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Timber.tag("FoodApp").i("SplashActivity.onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Timber.tag("FoodApp").i("SplashActivity.onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Timber.tag("FoodApp").i("SplashActivity.onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Timber.tag("FoodApp").i("SplashActivity.onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Timber.tag("FoodApp").i("SplashActivity.onDestroy")
     }
 }

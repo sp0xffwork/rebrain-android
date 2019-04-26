@@ -15,7 +15,7 @@ private const val ARG_PARAM_PICTURE_RES_ID = "picture_res_id"
  * CarouselFragment
  * [CarouselFragment.newInstance] factory method
  */
-class CarouselFragment : BaseFragment() {
+class CarouselFragment : BaseFragment("CarouselFragment") {
     private var pictureResId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {

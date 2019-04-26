@@ -1,21 +1,20 @@
 package com.pavel.rebrain.screen.main.tabs
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseFragment
+import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 
 
 /**
  * FavoritesTabFragment
  * показывает вкладку с избранным
  */
-class FavoritesTabFragment : BaseFragment() {
+class FavoritesTabFragment : BaseFragment("FavoritesTabFragment") {
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,12 +43,9 @@ class FavoritesTabFragment : BaseFragment() {
         listener = null
     }
 
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
-
     companion object {
+        val FRAGMENT_TAG = "FavoritesTabFragment"
+
         fun newInstance() =
             FavoritesTabFragment()
     }

@@ -1,24 +1,23 @@
 package com.pavel.rebrain.screen.main.tabs
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseFragment
+import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 import com.pavel.rebrain.screen.main.carousel.adapter.CarouselFragmentPagerAdapter
 import com.pavel.rebrain.screen.main.carousel.adapter.CarouselFragmentStatePagerAdapter
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main_tab.*
 
 /**
  * MainTabFragment
  * показывает карусель
  */
-class MainTabFragment : BaseFragment() {
+class MainTabFragment : BaseFragment("MainTabFragment") {
+
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,12 +70,9 @@ class MainTabFragment : BaseFragment() {
         listener = null
     }
 
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
-
     companion object {
+        val FRAGMENT_TAG = "MainTabFragment"
+
         fun newInstance() =
             MainTabFragment()
     }

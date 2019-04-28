@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.pavel.rebrain.App
 import timber.log.Timber
 
 /**
@@ -14,64 +15,64 @@ import timber.log.Timber
  * Логирует жизненный цикл фрагмента.
  *
  */
-open class BaseFragment : Fragment() {
+open class BaseFragment(val logTitle: String) : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        Timber.tag("FoodApp").i("Fragment.onAttach")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onAttach")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.tag("FoodApp").i("Fragment.onCreate")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onCreate")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Timber.tag("FoodApp").i("Fragment.onCreateView")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onCreateView")
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Timber.tag("FoodApp").i("Fragment.onActivityCreated")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onActivityCreated")
     }
 
     override fun onStart() {
         super.onStart()
-        Timber.tag("FoodApp").i("Fragment.onStart")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onStart")
     }
 
     override fun onResume() {
         super.onResume()
-        Timber.tag("FoodApp").i("Fragment.onResume")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onResume")
     }
 
     override fun onPause() {
         super.onPause()
-        Timber.tag("FoodApp").i("Fragment.onPause")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onPause")
     }
 
     override fun onStop() {
         super.onStop()
-        Timber.tag("FoodApp").i("Fragment.onStop")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onStop")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Timber.tag("FoodApp").i("Fragment.onDestroyView")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onDestroyView")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Timber.tag("FoodApp").i("Fragment.onDestroy")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onDestroy")
     }
 
     override fun onDetach() {
         super.onDetach()
-        Timber.tag("FoodApp").i("Fragment.onDetach")
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onDetach")
     }
 
 }

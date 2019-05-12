@@ -4,6 +4,10 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
+    <style name="RegularFont.12">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="RegularFont.Bold">
         <item name="android:textStyle">bold</item>
     </style>

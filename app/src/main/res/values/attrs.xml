@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CustomView">
+    <declare-styleable name="BottomBarButton">
         <attr name="text" format="string" />
         <attr name="image" format="reference" />
+        <attr name="checked" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="ButtonCheckedState">
+        <attr name="state_button_checked" format="boolean"/>
+    </declare-styleable>
+
 </resources>

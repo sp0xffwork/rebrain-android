@@ -9,6 +9,7 @@ import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseActivity
 import com.pavel.rebrain.screen.main.tabs.FavoritesTabFragment
 import com.pavel.rebrain.screen.main.tabs.MainTabFragment
+import com.pavel.rebrain.screen.view.BottomBar
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -28,26 +29,23 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
+            bottomBar.setCheckedButton(BottomBar.MainTabType.MAIN)
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, MainTabFragment.newInstance(), MainTabFragment.FRAGMENT_TAG)
                 .commit()
         }
 
-        bottomBar.setOnTab1ClickListener {
-
+        bottomBar.setOnTabClickListener(BottomBar.MainTabType.MAIN) {
             Toast.makeText(this, "Tab1 Click", Toast.LENGTH_SHORT).show()
-
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, MainTabFragment.newInstance(), MainTabFragment.FRAGMENT_TAG)
                 .commit()
         }
 
-        bottomBar.setOnTab2ClickListener {
-
+        bottomBar.setOnTabClickListener(BottomBar.MainTabType.FAVORITES) {
             Toast.makeText(this, "Tab2 Click", Toast.LENGTH_SHORT).show()
-
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, FavoritesTabFragment.newInstance(), FavoritesTabFragment.FRAGMENT_TAG)

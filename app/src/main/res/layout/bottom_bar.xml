@@ -6,20 +6,24 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <com.pavel.rebrain.screen.view.CustomView
+    <com.pavel.rebrain.screen.view.BottomBarButton
         android:id="@+id/tab1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        custom:image="@drawable/main_2"
+        android:background="@drawable/bottom_bar_button_background"
+        android:padding="4dp"
+        custom:image="@drawable/bottom_bar_button_main_selector"
         custom:text="Главный" />
 
-    <com.pavel.rebrain.screen.view.CustomView
+    <com.pavel.rebrain.screen.view.BottomBarButton
         android:id="@+id/tab2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        custom:image="@drawable/favorites_2"
+        android:background="@drawable/bottom_bar_button_background"
+        android:padding="4dp"
+        custom:image="@drawable/bottom_bar_button_favorites_selector"
         custom:text="Избранное" />
 
 </LinearLayout>

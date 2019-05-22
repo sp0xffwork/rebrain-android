@@ -37,7 +37,7 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
         }
 
         bottomBar.setOnTabClickListener(BottomBar.MainTabType.MAIN) {
-            Toast.makeText(this, "Tab1 Click", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Tab1 Click", Toast.LENGTH_SHORT).show()
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, MainTabFragment.newInstance(), MainTabFragment.FRAGMENT_TAG)
@@ -45,7 +45,7 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
         }
 
         bottomBar.setOnTabClickListener(BottomBar.MainTabType.FAVORITES) {
-            Toast.makeText(this, "Tab2 Click", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Tab2 Click", Toast.LENGTH_SHORT).show()
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, FavoritesTabFragment.newInstance(), FavoritesTabFragment.FRAGMENT_TAG)

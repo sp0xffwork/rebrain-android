@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseActivity
+import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.tabs.FavoritesTabFragment
 import com.pavel.rebrain.screen.main.tabs.MainTabFragment
 import com.pavel.rebrain.screen.view.BottomBar
@@ -30,27 +30,23 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
 
         if (savedInstanceState == null) {
             bottomBar.setCheckedButton(BottomBar.MainTabType.MAIN)
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, MainTabFragment.newInstance(), MainTabFragment.FRAGMENT_TAG)
-                .commit()
+            setFragment(MainTabFragment.newInstance())
         }
 
         bottomBar.setOnTabClickListener(BottomBar.MainTabType.MAIN) {
-            //Toast.makeText(this, "Tab1 Click", Toast.LENGTH_SHORT).show()
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, MainTabFragment.newInstance(), MainTabFragment.FRAGMENT_TAG)
-                .commit()
+            setFragment(MainTabFragment.newInstance())
         }
 
         bottomBar.setOnTabClickListener(BottomBar.MainTabType.FAVORITES) {
-            //Toast.makeText(this, "Tab2 Click", Toast.LENGTH_SHORT).show()
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, FavoritesTabFragment.newInstance(), FavoritesTabFragment.FRAGMENT_TAG)
-                .commit()
+            setFragment(FavoritesTabFragment.newInstance())
         }
+    }
+
+    private fun setFragment(fragment: BaseFragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, fragment, fragment.getFragmentTag())
+            .commit()
     }
 
     override fun onFragmentInteraction(uri: Uri) {

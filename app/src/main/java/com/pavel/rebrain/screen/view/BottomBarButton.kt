@@ -71,8 +71,4 @@ class BottomBarButton @JvmOverloads constructor(context: Context, attrs: Attribu
     fun isChecked(): Boolean {
         return checked
     }
-
-    fun setOnViewClickListener(l: (View) -> Unit) {
-        super.setOnClickListener(l)
-    }
 }

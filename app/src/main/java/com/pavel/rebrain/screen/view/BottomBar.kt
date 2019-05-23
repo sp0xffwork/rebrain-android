@@ -19,12 +19,10 @@ class BottomBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         MAIN, FAVORITES
     }
 
-    class ButtonItem(var listener: ((View) -> Unit)? = null, var button: BottomBarButton? = null)
-
     private val tabButtonsMap by lazy {
-        hashMapOf<MainTabType, ButtonItem>(
-            MainTabType.MAIN to ButtonItem(null, tab1),
-            MainTabType.FAVORITES to ButtonItem(null, tab2)
+        hashMapOf<MainTabType, BottomBarButton>(
+            MainTabType.MAIN to tab1,
+            MainTabType.FAVORITES to tab2
         )
     }
 
@@ -38,9 +36,8 @@ class BottomBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     fun setOnTabClickListener(tabType: MainTabType, listener: (View) -> Unit) {
-        tabButtonsMap[tabType]?.listener = listener
-        tabButtonsMap[tabType]?.button?.setOnViewClickListener {
-            if (tabButtonsMap[tabType]?.button?.isChecked() != true) {
+        tabButtonsMap[tabType]?.setOnClickListener {
+            if (tabButtonsMap[tabType]?.isChecked() != true) {
                 updateSelection(tabType)
                 listener(it)
             }
@@ -53,14 +50,14 @@ class BottomBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     }
 
     private fun checkSelectedTab(selectedTabType: MainTabType) {
-        tabButtonsMap[selectedTabType]?.button?.setChecked(true)
+        tabButtonsMap[selectedTabType]?.setChecked(true)
     }
 
     private fun uncheckOtherTabs(selectedTabType: MainTabType) {
         tabButtonsMap.keys
             .filter { it != selectedTabType }
             .forEach {
-                tabButtonsMap[it]?.button?.setChecked(false)
+                tabButtonsMap[it]?.setChecked(false)
             }
     }
 }

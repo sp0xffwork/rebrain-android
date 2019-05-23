@@ -9,7 +9,6 @@ import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 import com.pavel.rebrain.screen.main.carousel.adapter.CarouselFragmentPagerAdapter
-import com.pavel.rebrain.screen.main.carousel.adapter.CarouselFragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.fragment_main_tab.*
 
 /**
@@ -20,8 +19,8 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private var listener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun getFragmentTag(): String {
+        return "MainTabFragment"
     }
 
     override fun onCreateView(
@@ -50,7 +49,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
             )
 
         val pagerAdapter = CarouselFragmentPagerAdapter(childFragmentManager, arrayOfPictureResIds)
-        val statePagerAdapter = CarouselFragmentStatePagerAdapter(childFragmentManager, arrayOfPictureResIds)
+        //val statePagerAdapter = CarouselFragmentStatePagerAdapter(childFragmentManager, arrayOfPictureResIds)
 
         pager.adapter = pagerAdapter
         //pager.adapter = statePagerAdapter
@@ -71,8 +70,6 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     }
 
     companion object {
-        val FRAGMENT_TAG = "MainTabFragment"
-
         fun newInstance() =
             MainTabFragment()
     }

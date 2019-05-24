@@ -15,7 +15,9 @@ import timber.log.Timber
  * Логирует жизненный цикл фрагмента.
  *
  */
-open class BaseFragment(val logTitle: String) : Fragment() {
+abstract class BaseFragment(val logTitle: String) : Fragment() {
+
+    abstract fun getFragmentTag(): String
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)

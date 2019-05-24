@@ -18,6 +18,10 @@ private const val ARG_PARAM_PICTURE_RES_ID = "picture_res_id"
 class CarouselFragment : BaseFragment("CarouselFragment") {
     private var pictureResId: Int = 0
 
+    override fun getFragmentTag() : String {
+        return "CarouselFragment"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

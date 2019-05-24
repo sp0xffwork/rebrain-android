@@ -6,7 +6,11 @@ import android.net.Uri
 import android.os.Bundle
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseActivity
+import com.pavel.rebrain.screen.base.BaseFragment
+import com.pavel.rebrain.screen.main.tabs.FavoritesTabFragment
 import com.pavel.rebrain.screen.main.tabs.MainTabFragment
+import com.pavel.rebrain.screen.view.BottomBar
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 /**
@@ -25,11 +29,24 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, MainTabFragment.newInstance(), MainTabFragment.FRAGMENT_TAG)
-                .commit()
+            bottomBar.setCheckedButton(BottomBar.MainTabType.MAIN)
+            setFragment(MainTabFragment.newInstance())
         }
+
+        bottomBar.setOnTabClickListener(BottomBar.MainTabType.MAIN) {
+            setFragment(MainTabFragment.newInstance())
+        }
+
+        bottomBar.setOnTabClickListener(BottomBar.MainTabType.FAVORITES) {
+            setFragment(FavoritesTabFragment.newInstance())
+        }
+    }
+
+    private fun setFragment(fragment: BaseFragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, fragment, fragment.getFragmentTag())
+            .commit()
     }
 
     override fun onFragmentInteraction(uri: Uri) {

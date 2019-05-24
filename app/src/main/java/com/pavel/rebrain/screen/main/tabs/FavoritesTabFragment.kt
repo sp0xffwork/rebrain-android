@@ -17,8 +17,8 @@ import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 class FavoritesTabFragment : BaseFragment("FavoritesTabFragment") {
     private var listener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun getFragmentTag() : String {
+        return "FavoritesTabFragment"
     }
 
     override fun onCreateView(
@@ -44,8 +44,6 @@ class FavoritesTabFragment : BaseFragment("FavoritesTabFragment") {
     }
 
     companion object {
-        val FRAGMENT_TAG = "FavoritesTabFragment"
-
         fun newInstance() =
             FavoritesTabFragment()
     }

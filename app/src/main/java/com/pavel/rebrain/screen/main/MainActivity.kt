@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseActivity
 import com.pavel.rebrain.screen.base.BaseFragment
@@ -19,6 +18,10 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener {
 
+    enum class FragmentType {
+        Main, Favorites
+    }
+
     companion object {
         fun start(context: Context) {
             context.startActivity(Intent(context, MainActivity::class.java))
@@ -29,20 +32,8 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragmentMain: BaseFragment
-        val fragmentFavorites: BaseFragment
-
-        if (savedInstanceState == null) {
-            fragmentMain = MainTabFragment.newInstance()
-            fragmentFavorites = FavoritesTabFragment.newInstance()
-            supportFragmentManager.beginTransaction().add(R.id.container, fragmentMain, fragmentMain.getFragmentTag())
-                .commit()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.container, fragmentFavorites, fragmentFavorites.getFragmentTag()).commit()
-        } else {
-            fragmentMain = supportFragmentManager.findFragmentByTag("MainTabFragment") as BaseFragment
-            fragmentFavorites = supportFragmentManager.findFragmentByTag("FavoritesTabFragment") as BaseFragment
-        }
+        val fragmentMain: BaseFragment = getFragment(FragmentType.Main)
+        val fragmentFavorites: BaseFragment = getFragment(FragmentType.Favorites)
 
         bottomBar.setOnTabClickListener(BottomBar.MainTabType.MAIN) {
             setFragment(fragmentMain)
@@ -58,14 +49,45 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
     }
 
     private fun setFragment(fragment: BaseFragment) {
+        // извлекаем фрагменты из FragmentManager
         val fragmentMain = supportFragmentManager.findFragmentByTag("MainTabFragment")
         val fragmentFavorites = supportFragmentManager.findFragmentByTag("FavoritesTabFragment")
+
+        // и detach их
         fragmentMain?.let { supportFragmentManager.beginTransaction().detach(it).commit() }
         fragmentFavorites?.let { supportFragmentManager.beginTransaction().detach(it).commit() }
-        supportFragmentManager
-            .beginTransaction()
-            .attach(fragment)
-            .commit()
+
+        // ищем, был ли ранее добавлен fragment из аргумента
+        val frag = supportFragmentManager.findFragmentByTag(fragment.getFragmentTag())
+        supportFragmentManager.beginTransaction().apply {
+            if (frag === null) {
+                // если нет, то добавляем его
+                add(R.id.container, fragment, fragment.getFragmentTag())
+            } else {
+                // если да, то attach его
+                attach(fragment)
+            }
+        }.commit()
+    }
+
+    /**
+     *  извлекаем фрагмент з FragmentManager или создаем новый, если он не был сохранен
+     */
+    private fun getFragment(type: FragmentType): BaseFragment {
+
+        val tag = when (type) {
+            FragmentType.Main -> "MainTabFragment"
+            FragmentType.Favorites -> "FavoritesTabFragment"
+        }
+
+        val fragment = supportFragmentManager.findFragmentByTag(tag) as BaseFragment?
+        return if (fragment !== null)
+            fragment
+        else
+            when (type) {
+                FragmentType.Main -> MainTabFragment.newInstance()
+                FragmentType.Favorites -> FavoritesTabFragment.newInstance()
+            }
     }
 
     override fun onFragmentInteraction(uri: Uri) {

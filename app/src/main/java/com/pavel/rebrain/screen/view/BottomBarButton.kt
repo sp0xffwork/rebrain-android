@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
 import com.pavel.rebrain.R
 import kotlinx.android.synthetic.main.bottom_bar_button.view.*

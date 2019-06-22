@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 import com.pavel.rebrain.screen.main.carousel.adapter.CarouselFragmentPagerAdapter
 import kotlinx.android.synthetic.main.fragment_main_tab.*
+import kotlinx.android.synthetic.main.layout_toolbar.*
 
 /**
  * MainTabFragment
@@ -53,6 +55,8 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
         pager.adapter = pagerAdapter
         //pager.adapter = statePagerAdapter
+
+        initToobar()
     }
 
     override fun onAttach(context: Context?) {
@@ -67,6 +71,11 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     override fun onDetach() {
         super.onDetach()
         listener = null
+    }
+
+    private fun initToobar() {
+        toolbar.title = "FoodApp"
+        (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
     }
 
     companion object {

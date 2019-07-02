@@ -8,11 +8,18 @@
 
     <include layout="@layout/layout_toolbar" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </androidx.viewpager.widget.ViewPager>
+    -->
 
 </LinearLayout>

@@ -38,6 +38,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /*
         val arrayOfPictureResIds =
             arrayOf(
                 R.drawable.pic_1,
@@ -51,6 +52,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
                 R.drawable.pic_9,
                 R.drawable.pic_10
             )
+        */
 
         //val pagerAdapter = CarouselFragmentPagerAdapter(childFragmentManager, arrayOfPictureResIds)
         //val statePagerAdapter = CarouselFragmentStatePagerAdapter(childFragmentManager, arrayOfPictureResIds)
@@ -59,9 +61,6 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
         initToobar()
         initRv()
-
-        adapter.foodList = Generator().getProducts()
-        adapter.notifyDataSetChanged()
     }
 
     override fun onAttach(context: Context?) {
@@ -85,8 +84,9 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private fun initRv() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = FoodListRecyclerViewAdapter(activity!!)
+        adapter = FoodListRecyclerViewAdapter(activity as Context, Generator().getProducts())
         recyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
     }
 
     companion object {

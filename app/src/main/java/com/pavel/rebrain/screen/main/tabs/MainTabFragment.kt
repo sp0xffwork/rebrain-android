@@ -84,7 +84,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private fun initRv() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = FoodListRecyclerViewAdapter(activity as Context, Generator().getProducts())
+        adapter = FoodListRecyclerViewAdapter(Generator().getProducts())
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
     }

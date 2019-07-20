@@ -3,8 +3,8 @@ package com.pavel.rebrain.domain.util
 import com.pavel.rebrain.domain.Product
 
 class Generator {
-    private fun getOriginalProductsList(): List<Product> {
-        return listOf(
+    private fun getOriginalProductsList(): MutableList<Product> {
+        return mutableListOf(
             Product(0, "Салат из морских водрослей с ореховым соусом"),
             Product(1, "Спайси лосось с жасминовым рисом"),
             Product(2, "Рисовая лапша с морепродуктами"),
@@ -28,8 +28,8 @@ class Generator {
         )
     }
 
-    fun getProducts(): List<Product> {
-        val originalProductsList = getOriginalProductsList() as MutableList<Product>
+    fun getProducts(): MutableList<Product> {
+        val originalProductsList = getOriginalProductsList()
         val resultProductsList = mutableListOf<Product>()
         for (i in 19 downTo 0) {
             val rnd = (0..i).random()

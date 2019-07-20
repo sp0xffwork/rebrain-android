@@ -24,8 +24,7 @@
         <item name="android:lineSpacingExtra">0sp</item>
     </style>
 
-    <style name="RegularFont.Bold.22.White.LnSpEx0.LtSp001">
-    </style>
+    <style name="RegularFont.Bold.22.White.LnSpEx0.LtSp001"></style>
 
     <style name="LightFont">
         <item name="android:fontFamily">sans-serif-light</item>
@@ -51,10 +50,28 @@
         <item name="android:lineSpacingExtra">0sp</item>
     </style>
 
-    <style name="IntroActivityPrimaryText" parent="RegularFont.Bold.22.White.LnSpEx0.LtSp001">
+    <style name="IntroActivityPrimaryText" parent="RegularFont.Bold.22.White.LnSpEx0.LtSp001"/>
+
+    <style name="IntroActivitySecondaryText" parent="LightFont.Normal.16.White.LnSpEx0.LtSp003"/>
+
+    <style name="LightFont.Normal.13">
+        <item name="android:textSize">13sp</item>
     </style>
 
-    <style name="IntroActivitySecondaryText" parent="LightFont.Normal.16.White.LnSpEx0.LtSp003">
+    <style name="LightFont.Normal.13.Black">
+        <item name="android:textColor">#000</item>
     </style>
+
+    <style name="LightFont.Normal.15">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="LightFont.Normal.15.Green">
+        <item name="android:textColor">#67c674</item>
+    </style>
+
+    <style name="CardFoodNameText" parent="LightFont.Normal.13.Black"/>
+
+    <style name="CardFoodPriceText" parent="LightFont.Normal.15.Green"/>
 
 </resources>

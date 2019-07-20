@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.pavel.rebrain.R
+import com.pavel.rebrain.domain.util.Generator
 import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
-import com.pavel.rebrain.screen.main.carousel.adapter.CarouselFragmentPagerAdapter
+import com.pavel.rebrain.screen.main.list.FoodListRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_main_tab.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
@@ -20,6 +22,7 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
 class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private var listener: OnFragmentInteractionListener? = null
+    private lateinit var adapter: FoodListRecyclerViewAdapter
 
     override fun getFragmentTag(): String {
         return "MainTabFragment"
@@ -29,13 +32,13 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_tab, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /*
         val arrayOfPictureResIds =
             arrayOf(
                 R.drawable.pic_1,
@@ -49,14 +52,15 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
                 R.drawable.pic_9,
                 R.drawable.pic_10
             )
+        */
 
-        val pagerAdapter = CarouselFragmentPagerAdapter(childFragmentManager, arrayOfPictureResIds)
+        //val pagerAdapter = CarouselFragmentPagerAdapter(childFragmentManager, arrayOfPictureResIds)
         //val statePagerAdapter = CarouselFragmentStatePagerAdapter(childFragmentManager, arrayOfPictureResIds)
-
-        pager.adapter = pagerAdapter
+        //pager.adapter = pagerAdapter
         //pager.adapter = statePagerAdapter
 
         initToobar()
+        initRv()
     }
 
     override fun onAttach(context: Context?) {
@@ -76,6 +80,13 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     private fun initToobar() {
         toolbar.title = "FoodApp"
         (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
+    }
+
+    private fun initRv() {
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        adapter = FoodListRecyclerViewAdapter(Generator().getProducts())
+        recyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
     }
 
     companion object {

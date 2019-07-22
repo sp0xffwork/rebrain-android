@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.pavel.rebrain.R
 import com.pavel.rebrain.domain.Product
 import kotlinx.android.synthetic.main.element.view.*
@@ -41,17 +41,12 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
             productNameView.text = data.name
             @SuppressLint("SetTextI18n")
             productPriceView.text = "${data.id * 10} руб"
-            productImageView.setImageDrawable(
-                ResourcesCompat.getDrawable(
-                    parent.context.resources,
-                    if (data.id % 2 == 0) {
-                        R.drawable.eda
-                    } else {
-                        R.drawable.pic_2
-                    },
-                    null
-                )
-            )
+
+            Glide
+                .with(productImageView.context)
+                .load(R.drawable.pic_1)
+                .centerCrop()
+                .into(productImageView);
         }
     }
 }

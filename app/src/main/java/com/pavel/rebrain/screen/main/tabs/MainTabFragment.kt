@@ -79,14 +79,14 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private fun initToobar() {
         toolbar.title = "FoodApp"
-        (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
     private fun initRv() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         adapter = FoodListRecyclerViewAdapter(Generator().getProducts())
         recyclerView.adapter = adapter
-        adapter.notifyDataSetChanged()
+        //adapter.notifyDataSetChanged()
     }
 
     companion object {

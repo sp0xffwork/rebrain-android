@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pavel.rebrain.App
 import com.pavel.rebrain.R
 import com.pavel.rebrain.domain.util.Generator
 import com.pavel.rebrain.screen.base.BaseFragment
@@ -14,6 +15,7 @@ import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 import com.pavel.rebrain.screen.main.list.FoodListRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_main_tab.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import timber.log.Timber
 
 /**
  * MainTabFragment
@@ -83,10 +85,10 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     }
 
     private fun initRv() {
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.initRv")
         recyclerView.layoutManager = LinearLayoutManager(activity)
         adapter = FoodListRecyclerViewAdapter(Generator().getProducts())
         recyclerView.adapter = adapter
-        //adapter.notifyDataSetChanged()
     }
 
     companion object {

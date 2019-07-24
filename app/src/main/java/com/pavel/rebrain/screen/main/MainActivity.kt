@@ -34,8 +34,8 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragmentMain: BaseFragment = getFragment(FragmentType.MAIN)
-        val fragmentFavorites: BaseFragment = getFragment(FragmentType.FAVORITES)
+        //val fragmentMain: BaseFragment = getFragment(FragmentType.MAIN)
+        //val fragmentFavorites: BaseFragment = getFragment(FragmentType.FAVORITES)
 
         bottomBar.setOnTabClickListener(BottomBar.MainTabType.MAIN) {
             setFragment(FragmentType.MAIN)
@@ -45,15 +45,19 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
             setFragment(FragmentType.FAVORITES)
         }
 
-        //todo сохранять какой фрагмент активен и восстанавливать при пересоздании activity
-        bottomBar.setCheckedButton(BottomBar.MainTabType.MAIN)
-        setFragment(FragmentType.MAIN)
+        if (savedInstanceState == null) {
+            //todo сохранять какой фрагмент активен и восстанавливать при пересоздании activity
+            bottomBar.setCheckedButton(BottomBar.MainTabType.MAIN)
+            setFragment(FragmentType.MAIN)
+        }
     }
 
     private fun setFragment(type: FragmentType) {
         val fragments = supportFragmentManager.fragments
         for (fragment: Fragment in fragments) {
-            supportFragmentManager.beginTransaction().detach(fragment).commit()
+            if (fragment is BaseFragment && (fragment.getFragmentTag() == "MainTabFragment" || fragment.getFragmentTag() == "FavoritesTabFragment")) {
+                supportFragmentManager.beginTransaction().detach(fragment).commit()
+            }
         }
         val fragment = getFragment(type)
         putFragment(type, fragment)
@@ -65,13 +69,10 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
     private fun getFragment(type: FragmentType): BaseFragment {
 
         val fragment = supportFragmentManager.findFragmentByTag(type.tag) as BaseFragment?
-        return if (fragment != null)
-            fragment
-        else
-            when (type) {
-                FragmentType.MAIN -> MainTabFragment.newInstance()
-                FragmentType.FAVORITES -> FavoritesTabFragment.newInstance()
-            }
+        return fragment ?: when (type) {
+            FragmentType.MAIN -> MainTabFragment.newInstance()
+            FragmentType.FAVORITES -> FavoritesTabFragment.newInstance()
+        }
     }
 
     /**

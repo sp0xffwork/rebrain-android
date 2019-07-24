@@ -17,7 +17,7 @@ import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 class FavoritesTabFragment : BaseFragment("FavoritesTabFragment") {
     private var listener: OnFragmentInteractionListener? = null
 
-    override fun getFragmentTag() : String {
+    override fun getFragmentTag(): String {
         return "FavoritesTabFragment"
     }
 

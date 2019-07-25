@@ -42,6 +42,11 @@ abstract class BaseFragment(val logTitle: String) : Fragment() {
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.onActivityCreated")
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Timber.tag(App.APP_LOG_TAG).i("$logTitle.onViewCreated")
+    }
+
     override fun onStart() {
         super.onStart()
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.onStart")

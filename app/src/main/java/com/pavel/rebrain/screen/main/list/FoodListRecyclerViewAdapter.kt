@@ -17,8 +17,13 @@ import timber.log.Timber
 /**
  * Adapter для RecyclerView для отображения списка продуктов
  */
-class FoodListRecyclerViewAdapter(private val foodList: MutableList<Product>) :
+class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
     RecyclerView.Adapter<FoodListRecyclerViewAdapter.Holder>() {
+
+    fun setFoodList(foodList: MutableList<Product>) {
+        this.foodList = foodList
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val holder = Holder(parent, LayoutInflater.from(parent.context).inflate(R.layout.element, parent, false))

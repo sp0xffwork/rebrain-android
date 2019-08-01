@@ -2,6 +2,7 @@ package com.pavel.rebrain.screen.main.tabs
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.pavel.rebrain.screen.main.list.FoodListRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_main_tab.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import timber.log.Timber
+
 
 /**
  * MainTabFragment
@@ -61,8 +63,9 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         //pager.adapter = pagerAdapter
         //pager.adapter = statePagerAdapter
 
-        initToobar()
+        initToolbar()
         initRv()
+        initSwipeToRefresh()
     }
 
     override fun onAttach(context: Context?) {
@@ -79,7 +82,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         listener = null
     }
 
-    private fun initToobar() {
+    private fun initToolbar() {
         toolbar.title = "FoodApp"
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
@@ -89,6 +92,16 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         adapter = FoodListRecyclerViewAdapter(Generator().getProducts())
         recyclerView.adapter = adapter
+    }
+
+    private fun initSwipeToRefresh() {
+        swipeRefreshLayout.setOnRefreshListener {
+            // эмуляция ожидания загрузки
+            Handler().postDelayed({
+                adapter.setFoodList(Generator().getProducts())
+                swipeRefreshLayout.isRefreshing = false
+            }, 2000)
+        }
     }
 
     companion object {

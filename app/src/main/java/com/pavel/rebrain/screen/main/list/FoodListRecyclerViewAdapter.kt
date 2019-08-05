@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.pavel.rebrain.App
 import com.pavel.rebrain.R
 import com.pavel.rebrain.domain.Product
-import kotlinx.android.synthetic.main.element.view.*
+import kotlinx.android.synthetic.main.element_list.view.*
 import timber.log.Timber
 
 /**
@@ -20,13 +20,30 @@ import timber.log.Timber
 class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
     RecyclerView.Adapter<FoodListRecyclerViewAdapter.Holder>() {
 
+    enum class TableMode {
+        List, Grid
+    }
+
+    private var grid: Boolean = false
+
+    fun setTabledMode(mode: TableMode) {
+        grid = mode == TableMode.Grid
+        notifyDataSetChanged()
+    }
+
     fun setFoodList(foodList: MutableList<Product>) {
         this.foodList = foodList
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val holder = Holder(parent, LayoutInflater.from(parent.context).inflate(R.layout.element, parent, false))
+        val elementResId = if (grid) {
+            R.layout.element_grid
+        } else {
+            R.layout.element_list
+        }
+        val v = LayoutInflater.from(parent.context).inflate(elementResId, parent, false)
+        val holder = Holder(parent, v)
         Timber.tag(App.APP_LOG_TAG).i("onCreateViewHolder ${parent.context}")
         return holder
     }
@@ -50,7 +67,7 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
         fun bind(data: Product) {
             productNameView.text = data.name
             @SuppressLint("SetTextI18n")
-            productPriceView.text = "${data.id * 10} руб"
+            productPriceView.text = "${data.id * 10}"
 
             Glide
                 .with(parent.context)
@@ -62,8 +79,6 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
                         else -> R.drawable.pic_4
                     }
                 )
-                //.skipMemoryCache(true)
-                //.diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.drawable.eda)
                 .error(R.mipmap.ic_launcher)
                 .centerCrop()

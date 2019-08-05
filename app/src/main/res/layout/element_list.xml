@@ -37,12 +37,27 @@
                 android:textAppearance="@style/CardFoodNameText"
                 tools:text="Салат из морских водорослей с ореховым соусом" />
 
-            <TextView
-                android:id="@+id/textProductPrice"
+            <LinearLayout
+                android:id="@+id/layoutProductPrice"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/CardFoodPriceText"
-                tools:text="450 руб." />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textProductPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/CardFoodPriceText"
+                    tools:text="450" />
+
+                <TextView
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/CardFoodPriceMoneyText"
+                    android:text="руб." />
+
+            </LinearLayout>
 
         </LinearLayout>
 

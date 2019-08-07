@@ -135,7 +135,13 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         if (mode == FoodListRecyclerViewAdapter.TableMode.Grid) {
             recyclerView.layoutManager = GridLayoutManager(activity, 2)
             // todo: добавить перевод spacing из dp -> px
-            recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 30, true))
+            recyclerView.addItemDecoration(
+                GridSpacingItemDecoration(
+                    2,
+                    resources.getDimensionPixelOffset(R.dimen.grid_element_spacing),
+                    true
+                )
+            )
         } else {
             recyclerView.layoutManager = LinearLayoutManager(activity)
         }

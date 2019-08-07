@@ -24,10 +24,10 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
         List, Grid
     }
 
-    private var grid: Boolean = false
+    private var isGrid: Boolean = false
 
     fun setTabledMode(mode: TableMode) {
-        grid = mode == TableMode.Grid
+        isGrid = mode == TableMode.Grid
         notifyDataSetChanged()
     }
 
@@ -37,7 +37,7 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val elementResId = if (grid) {
+        val elementResId = if (isGrid) {
             R.layout.element_grid
         } else {
             R.layout.element_list

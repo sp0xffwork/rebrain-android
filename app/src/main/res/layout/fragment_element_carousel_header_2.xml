@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0eb14b"
+    tools:context=".screen.main.carousel.CarouselFragment">
+
+    <LinearLayout
+        android:layout_width="262dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="26dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/carousel_header_text_1"
+                android:textAppearance="@style/CarouselTextStyle1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12sp"
+                android:layout_marginLeft="12sp"
+                android:text="@string/carousel_header_text_2_1"
+                android:textAppearance="@style/CarouselTextStyle2" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carousel_header_text_3"
+            android:textAppearance="@style/CarouselTextStyle1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carousel_header_text_4_1"
+            android:textAppearance="@style/CarouselTextStyle3"
+            android:textColor="#ffe687" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="@string/carousel_header_text_5_1"
+            android:textAppearance="@style/CarouselTextStyle4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carousel_header_text_6"
+            android:textAppearance="@style/CarouselTextStyle4" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="102dp"
+        android:layout_height="155dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/element_carousel_picture_1">
+
+    </ImageView>
+
+</RelativeLayout>

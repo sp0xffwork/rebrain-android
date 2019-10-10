@@ -6,4 +6,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="carousel_header_text_1">СКИДКА</string>
+    <string name="carousel_header_text_2">-10%</string>
+    <string name="carousel_header_text_2_1">-20%</string>
+    <string name="carousel_header_text_3">И БЕСПЛАТНАЯ ДОСТАВКА</string>
+    <string name="carousel_header_text_4">НА ПЕРВЫХ 3 ЗАКАЗА</string>
+    <string name="carousel_header_text_4_1">НА ПЕРВЫХ 10 ЗАКАЗОВ</string>
+    <string name="carousel_header_text_5">*Акция действует до 30 июня</string>
+    <string name="carousel_header_text_5_1">*Акция действует до 30 октября</string>
+    <string name="carousel_header_text_6">2019 года.</string>
 </resources>

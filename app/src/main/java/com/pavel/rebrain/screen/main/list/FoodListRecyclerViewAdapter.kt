@@ -15,6 +15,7 @@ import com.pavel.rebrain.App
 import com.pavel.rebrain.R
 import com.pavel.rebrain.domain.Product
 import com.pavel.rebrain.screen.base.BaseActivity
+import com.pavel.rebrain.screen.main.carousel.adapter.CarouselFragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.list_element_carousel.view.*
 import kotlinx.android.synthetic.main.list_element_row.view.*
 import timber.log.Timber
@@ -141,13 +142,13 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
             // массив layout для показа в карусели
             val arrayOfPictureResIds =
                 arrayOf(
-                    R.layout.fragment_element_carousel_header_1,
-                    R.layout.fragment_element_carousel_header_2,
-                    R.layout.fragment_element_carousel_header_1
+                    R.drawable.element_carousel,
+                    R.drawable.element_carousel,
+                    R.drawable.element_carousel
                 )
 
             // карусель нормально перерисовывается только, если FragmentStatePagerAdapter
-            val pagerAdapter = ElementCarouselFragmentStatePagerAdapter(
+            val pagerAdapter = CarouselFragmentStatePagerAdapter(
                 (context as BaseActivity).supportFragmentManager,
                 arrayOfPictureResIds
             )

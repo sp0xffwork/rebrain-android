@@ -29,7 +29,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     private var listener: OnFragmentInteractionListener? = null
     private lateinit var adapter: FoodListRecyclerViewAdapter
 
-    private var mode = FoodListRecyclerViewAdapter.TableMode.List
+    private var mode = FoodListRecyclerViewAdapter.TableMode.LIST
 
     override fun getFragmentTag(): String {
         return "MainTabFragment"
@@ -93,10 +93,10 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_button -> {
-                mode = if (mode == FoodListRecyclerViewAdapter.TableMode.Grid) {
-                    FoodListRecyclerViewAdapter.TableMode.List
+                mode = if (mode == FoodListRecyclerViewAdapter.TableMode.GRID) {
+                    FoodListRecyclerViewAdapter.TableMode.LIST
                 } else {
-                    FoodListRecyclerViewAdapter.TableMode.Grid
+                    FoodListRecyclerViewAdapter.TableMode.GRID
                 }
                 changeMenuIcon(item)
                 setAdapterMode()
@@ -113,8 +113,8 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private fun changeMenuIcon(item: MenuItem) {
         val iconResId = when (mode) {
-            FoodListRecyclerViewAdapter.TableMode.List -> R.drawable.ic_menu_grid
-            FoodListRecyclerViewAdapter.TableMode.Grid -> R.drawable.ic_menu_list
+            FoodListRecyclerViewAdapter.TableMode.LIST -> R.drawable.ic_menu_grid
+            FoodListRecyclerViewAdapter.TableMode.GRID -> R.drawable.ic_menu_list
         }
         item.setIcon(iconResId)
     }
@@ -132,7 +132,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
             recyclerView.removeItemDecorationAt(0)
         }
 
-        if (mode == FoodListRecyclerViewAdapter.TableMode.Grid) {
+        if (mode == FoodListRecyclerViewAdapter.TableMode.GRID) {
             recyclerView.layoutManager = GridLayoutManager(activity, 2)
             // todo: добавить перевод spacing из dp -> px
             recyclerView.addItemDecoration(

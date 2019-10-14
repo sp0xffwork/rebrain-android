@@ -28,17 +28,17 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class TableMode {
-        List, Grid
+        LIST, GRID
     }
 
     enum class ElementType(val type: Int) {
-        Carousel(0), Normal(1)
+        CAROUSEL(0), NORMAL(1)
     }
 
     private var isGrid: Boolean = false
 
     fun setTabledMode(mode: TableMode) {
-        isGrid = mode == TableMode.Grid
+        isGrid = mode == TableMode.GRID
         notifyDataSetChanged()
     }
 
@@ -50,17 +50,17 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         val holder = when (ElementType.values()[viewType]) {
-            ElementType.Carousel -> {
-                HolderCarousel(parent)
+            ElementType.CAROUSEL -> {
+                CarouselHolder(parent)
             }
-            ElementType.Normal -> {
+            ElementType.NORMAL -> {
                 val elementResId = if (isGrid) {
                     R.layout.grid_element_cell
                 } else {
                     R.layout.list_element_row
                 }
                 val v = LayoutInflater.from(parent.context).inflate(elementResId, parent, false)
-                HolderNormal(parent, v)
+                NormalHolder(parent, v)
             }
         }
 
@@ -75,18 +75,18 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
 
     override fun getItemViewType(position: Int): Int {
         // карусель только на первой позиции списка, но не в grid
-        return if (position == 0 && !isGrid) ElementType.Carousel.type else ElementType.Normal.type
+        return if (position == 0 && !isGrid) ElementType.CAROUSEL.type else ElementType.NORMAL.type
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         Timber.tag(App.APP_LOG_TAG).i("onBindViewHolder $position")
         when (ElementType.values()[getItemViewType(position)]) {
-            ElementType.Carousel -> {
-                (holder as HolderCarousel).bind()
+            ElementType.CAROUSEL -> {
+                (holder as CarouselHolder).bind()
             }
-            ElementType.Normal -> {
+            ElementType.NORMAL -> {
                 // учитываем, что в списке добавлена карусель, как дополнитедльный элемент
-                (holder as HolderNormal).bind(foodList[if (isGrid) position else position - 1])
+                (holder as NormalHolder).bind(foodList[if (isGrid) position else position - 1])
             }
         }
     }
@@ -94,7 +94,7 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
     /**
      * Holder для строк, связанных с продуктами
      */
-    class HolderNormal(private val parent: ViewGroup, v: View) : RecyclerView.ViewHolder(v) {
+    class NormalHolder(private val parent: ViewGroup, v: View) : RecyclerView.ViewHolder(v) {
 
         private var productNameView: TextView = v.textProductName
         private var productPriceView: TextView = v.textProductPrice
@@ -125,7 +125,7 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
     /**
      * Holder для строк, связанных с встроенной каруселью
      */
-    class HolderCarousel(v: View) : RecyclerView.ViewHolder(v) {
+    class CarouselHolder(v: View) : RecyclerView.ViewHolder(v) {
         private lateinit var context: Context
         private var carousel: ViewPager = v.elementCarouselPager
         private var dots: TabLayout = v.elementCarouselTabLayout

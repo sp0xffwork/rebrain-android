@@ -10,6 +10,7 @@ ext{
     kotlinxCoroutinesVersion='1.1.1'
     legacySupportV4Version='1.0.0'
     glideVersion='4.9.0'
+    materialVersion='1.0.0'
     junitVersion='4.12'
     testRunnerVersion='1.1.1'
     testEspressoCoreVersion='3.1.1'

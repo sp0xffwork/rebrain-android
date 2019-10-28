@@ -17,6 +17,7 @@ import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 import com.pavel.rebrain.screen.main.list.FoodListRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_main_tab.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import org.jetbrains.anko.support.v4.toast
 import timber.log.Timber
 
 
@@ -121,7 +122,9 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private fun initRv() {
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.initRv")
-        adapter = FoodListRecyclerViewAdapter(Generator().getProducts())
+        adapter = FoodListRecyclerViewAdapter(Generator().getProducts()) { id ->
+            if (id != null) toast("${id}")
+        }
         recyclerView.adapter = adapter
         setAdapterMode()
     }
@@ -173,13 +176,20 @@ class GridSpacingItemDecoration(
     private val includeEdge: Boolean
 ) : RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
         val position = parent.getChildAdapterPosition(view) // item position
         val column = position % spanCount // item column
 
         if (includeEdge) {
-            outRect.left = spacing - column * spacing / spanCount // spacing - column * ((1f / spanCount) * spacing)
-            outRect.right = (column + 1) * spacing / spanCount // (column + 1) * ((1f / spanCount) * spacing)
+            outRect.left =
+                spacing - column * spacing / spanCount // spacing - column * ((1f / spanCount) * spacing)
+            outRect.right =
+                (column + 1) * spacing / spanCount // (column + 1) * ((1f / spanCount) * spacing)
 
             if (position < spanCount) { // top edge
                 outRect.top = spacing

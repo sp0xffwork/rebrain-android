@@ -24,7 +24,7 @@ import timber.log.Timber
 /**
  * Adapter для RecyclerView для отображения списка продуктов
  */
-class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
+class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>, private var cartClickListener: (id: Int) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class TableMode {
@@ -60,7 +60,7 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
                     R.layout.list_element_row
                 }
                 val v = LayoutInflater.from(parent.context).inflate(elementResId, parent, false)
-                NormalHolder(parent, v)
+                NormalHolder(parent, v, cartClickListener)
             }
         }
 
@@ -94,13 +94,22 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>) :
     /**
      * Holder для строк, связанных с продуктами
      */
-    class NormalHolder(private val parent: ViewGroup, v: View) : RecyclerView.ViewHolder(v) {
+    class NormalHolder(private val parent: ViewGroup, v: View, private val cartClickListener: (id: Int) -> Unit) : RecyclerView.ViewHolder(v) {
 
+        private var productId: Int = -1
         private var productNameView: TextView = v.textProductName
         private var productPriceView: TextView = v.textProductPrice
         private var productImageView: ImageView = v.imageProduct
+        private var cartImageButton: ImageView = v.imageCart
+
+        init {
+            cartImageButton.setOnClickListener {
+                cartClickListener(productId)
+            }
+        }
 
         fun bind(data: Product) {
+            productId = data.id
             productNameView.text = data.name
             @SuppressLint("SetTextI18n")
             productPriceView.text = "${data.id * 10}"

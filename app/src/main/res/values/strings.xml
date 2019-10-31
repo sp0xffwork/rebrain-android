@@ -16,4 +16,8 @@
     <string name="carousel_header_text_5_1">*Акция действует до 30 октября</string>
     <string name="carousel_header_text_6">2019 года.</string>
     <string name="element_rub">руб.</string>
+    <string name="dialog_exit_title">Выход</string>
+    <string name="dialog_exit_message">Вы хотите выйти из приложения?</string>
+    <string name="dialog_button_cancel">Отмена</string>
+    <string name="dialog_button_yes">Да</string>
 </resources>

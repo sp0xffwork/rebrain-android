@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseActivity
@@ -91,6 +92,22 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented")
+    }
+
+    override fun onBackPressed() {
+        safeExit()
+    }
+
+    private fun safeExit() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.dialog_exit_title))
+            .setMessage(getString(R.string.dialog_exit_message))
+            .setNegativeButton(getString(R.string.dialog_button_cancel), null)
+            .setPositiveButton(getString(R.string.dialog_button_yes)) { _, _ ->
+                finish()
+            }
+            .create()
+            .show()
     }
 
 }

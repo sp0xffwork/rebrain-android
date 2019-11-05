@@ -6,6 +6,9 @@ import androidx.lifecycle.OnLifecycleEvent
 import com.pavel.rebrain.App
 import timber.log.Timber
 
+/**
+ * Класс, объект которого логгирует события жизненного цикла Activity
+ */
 class Logger(lifecycle: Lifecycle, private val logTitle: String) : LifecycleObserver {
 
     init {

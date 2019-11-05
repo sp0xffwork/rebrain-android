@@ -123,7 +123,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     private fun initRv() {
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.initRv")
         adapter = FoodListRecyclerViewAdapter(Generator().getProducts()) { id ->
-            if (id != null) toast("${id}")
+            toast("${id}")
         }
         recyclerView.adapter = adapter
         setAdapterMode()

@@ -6,15 +6,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pavel.rebrain.App
 import com.pavel.rebrain.R
-import com.pavel.rebrain.domain.util.Generator
 import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 import com.pavel.rebrain.screen.main.list.FoodListRecyclerViewAdapter
+import com.pavel.rebrain.viewmodel.ProductListViewModel
 import kotlinx.android.synthetic.main.fragment_main_tab.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.jetbrains.anko.support.v4.toast
@@ -29,6 +30,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private var listener: OnFragmentInteractionListener? = null
     private lateinit var adapter: FoodListRecyclerViewAdapter
+    private lateinit var productListViewModel: ProductListViewModel
 
     private var mode = FoodListRecyclerViewAdapter.TableMode.LIST
 
@@ -46,26 +48,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*
-        val arrayOfPictureResIds =
-            arrayOf(
-                R.drawable.pic_1,
-                R.drawable.pic_2,
-                R.drawable.pic_3,
-                R.drawable.pic_4,
-                R.drawable.pic_5,
-                R.drawable.pic_6,
-                R.drawable.pic_7,
-                R.drawable.pic_8,
-                R.drawable.pic_9,
-                R.drawable.pic_10
-            )
-        */
-
-        //val pagerAdapter = CarouselFragmentPagerAdapter(childFragmentManager, arrayOfPictureResIds)
-        //val statePagerAdapter = CarouselFragmentStatePagerAdapter(childFragmentManager, arrayOfPictureResIds)
-        //pager.adapter = pagerAdapter
-        //pager.adapter = statePagerAdapter
+        productListViewModel = ViewModelProviders.of(this).get(ProductListViewModel::class.java)
 
         initToolbar()
         initRv()
@@ -122,8 +105,8 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private fun initRv() {
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.initRv")
-        adapter = FoodListRecyclerViewAdapter(Generator().getProducts()) { id ->
-            toast("${id}")
+        adapter = FoodListRecyclerViewAdapter(productListViewModel.getProducts()) { id ->
+            toast("$id")
         }
         recyclerView.adapter = adapter
         setAdapterMode()
@@ -157,7 +140,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         swipeRefreshLayout.setOnRefreshListener {
             // эмуляция ожидания загрузки
             Handler().postDelayed({
-                adapter.setFoodList(Generator().getProducts())
+                adapter.setFoodList(productListViewModel.getProducts())
                 swipeRefreshLayout.isRefreshing = false
             }, 2000)
         }

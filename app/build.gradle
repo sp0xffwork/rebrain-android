@@ -36,6 +36,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "org.jetbrains.anko:anko:$anko_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extensions_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test:runner:$testRunnerVersion"

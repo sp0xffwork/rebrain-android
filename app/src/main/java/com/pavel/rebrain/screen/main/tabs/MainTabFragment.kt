@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pavel.rebrain.App
 import com.pavel.rebrain.R
-import com.pavel.rebrain.domain.util.Generator
 import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 import com.pavel.rebrain.screen.main.list.FoodListRecyclerViewAdapter
@@ -48,27 +47,6 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        /*
-        val arrayOfPictureResIds =
-            arrayOf(
-                R.drawable.pic_1,
-                R.drawable.pic_2,
-                R.drawable.pic_3,
-                R.drawable.pic_4,
-                R.drawable.pic_5,
-                R.drawable.pic_6,
-                R.drawable.pic_7,
-                R.drawable.pic_8,
-                R.drawable.pic_9,
-                R.drawable.pic_10
-            )
-        */
-
-        //val pagerAdapter = CarouselFragmentPagerAdapter(childFragmentManager, arrayOfPictureResIds)
-        //val statePagerAdapter = CarouselFragmentStatePagerAdapter(childFragmentManager, arrayOfPictureResIds)
-        //pager.adapter = pagerAdapter
-        //pager.adapter = statePagerAdapter
 
         productListViewModel = ViewModelProviders.of(this).get(ProductListViewModel::class.java)
 
@@ -128,7 +106,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     private fun initRv() {
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.initRv")
         adapter = FoodListRecyclerViewAdapter(productListViewModel.getProducts()) { id ->
-            toast("${id}")
+            toast("$id")
         }
         recyclerView.adapter = adapter
         setAdapterMode()

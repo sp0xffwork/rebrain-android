@@ -16,6 +16,7 @@ import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 import com.pavel.rebrain.screen.main.list.FoodListRecyclerViewAdapter
 import com.pavel.rebrain.viewmodel.ProductListViewModel
+import com.pavel.rebrain.viewmodel.ProductListViewModelFactory
 import kotlinx.android.synthetic.main.fragment_main_tab.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.jetbrains.anko.support.v4.toast
@@ -48,7 +49,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productListViewModel = ViewModelProviders.of(this).get(ProductListViewModel::class.java)
+        productListViewModel = ViewModelProviders.of(this, ProductListViewModelFactory(App.instance.appRepository)).get(ProductListViewModel::class.java)
 
         initToolbar()
         initRv()

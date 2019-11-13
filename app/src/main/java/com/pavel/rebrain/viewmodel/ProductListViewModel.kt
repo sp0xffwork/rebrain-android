@@ -2,15 +2,15 @@ package com.pavel.rebrain.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.pavel.rebrain.domain.Product
-import com.pavel.rebrain.domain.util.Generator
+import com.pavel.rebrain.repository.ProductsRepository
 
 /**
  * Класс для связи данных и интерфейса
  */
-class ProductListViewModel : ViewModel() {
+class ProductListViewModel(private var productsRepository: ProductsRepository) : ViewModel() {
 
     fun getProducts(): MutableList<Product> {
-        return Generator().getProducts()
+        return productsRepository.getProducts()
     }
 
 }

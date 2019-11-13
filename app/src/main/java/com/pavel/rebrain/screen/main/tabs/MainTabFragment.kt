@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,8 +33,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     private var listener: OnFragmentInteractionListener? = null
     private lateinit var adapter: FoodListRecyclerViewAdapter
     private lateinit var productListViewModel: ProductListViewModel
-
-    private var mode = FoodListRecyclerViewAdapter.TableMode.LIST
+    private var optionsMenu: Menu? = null
 
     override fun getFragmentTag(): String {
         return "MainTabFragment"
@@ -49,12 +49,25 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        productListViewModel = ViewModelProviders.of(this, ProductListViewModelFactory(App.instance.appRepository)).get(ProductListViewModel::class.java)
+        productListViewModel =
+            ViewModelProviders.of(this, ProductListViewModelFactory(App.instance.appRepository))
+                .get(ProductListViewModel::class.java)
+
+        productListViewModel.productList.observe(this, Observer { products ->
+            adapter.setFoodList(products)
+        })
+
+        productListViewModel.productsViewMode.observe(this, Observer { mode ->
+            changeMenuIcon(mode)
+            setAdapterMode(mode)
+        })
 
         initToolbar()
         initRv()
         initSwipeToRefresh()
     }
+
+
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -72,19 +85,15 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_tab, menu)
+        optionsMenu = menu
+        productListViewModel.getProductsViewMode()
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_button -> {
-                mode = if (mode == FoodListRecyclerViewAdapter.TableMode.GRID) {
-                    FoodListRecyclerViewAdapter.TableMode.LIST
-                } else {
-                    FoodListRecyclerViewAdapter.TableMode.GRID
-                }
-                changeMenuIcon(item)
-                setAdapterMode()
+                productListViewModel.changeProductsViewMode()
             }
         }
         return true
@@ -96,24 +105,25 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         setHasOptionsMenu(true)
     }
 
-    private fun changeMenuIcon(item: MenuItem) {
+    private fun changeMenuIcon(mode: FoodListRecyclerViewAdapter.TableMode) {
         val iconResId = when (mode) {
             FoodListRecyclerViewAdapter.TableMode.LIST -> R.drawable.ic_menu_grid
             FoodListRecyclerViewAdapter.TableMode.GRID -> R.drawable.ic_menu_list
         }
-        item.setIcon(iconResId)
+        val item = optionsMenu?.findItem(R.id.menu_button)
+        item?.setIcon(iconResId)
     }
 
     private fun initRv() {
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.initRv")
-        adapter = FoodListRecyclerViewAdapter(productListViewModel.getProducts()) { id ->
+        adapter = FoodListRecyclerViewAdapter(mutableListOf()) { id ->
             toast("$id")
         }
+        productListViewModel.getProducts()
         recyclerView.adapter = adapter
-        setAdapterMode()
     }
 
-    private fun setAdapterMode() {
+    private fun setAdapterMode(mode: FoodListRecyclerViewAdapter.TableMode) {
 
         while (recyclerView.itemDecorationCount > 0) {
             recyclerView.removeItemDecorationAt(0)
@@ -141,7 +151,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         swipeRefreshLayout.setOnRefreshListener {
             // эмуляция ожидания загрузки
             Handler().postDelayed({
-                adapter.setFoodList(productListViewModel.getProducts())
+                productListViewModel.getProducts()
                 swipeRefreshLayout.isRefreshing = false
             }, 2000)
         }
@@ -153,7 +163,9 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     }
 }
 
-
+/**
+ * Класс для устновки одинаковых расстояний между ячейками сетки
+ */
 class GridSpacingItemDecoration(
     private val spanCount: Int,
     private val spacing: Int,

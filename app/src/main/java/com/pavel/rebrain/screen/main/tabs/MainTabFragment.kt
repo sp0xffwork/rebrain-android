@@ -16,6 +16,7 @@ import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 import com.pavel.rebrain.screen.main.list.FoodListRecyclerViewAdapter
+import com.pavel.rebrain.domain.TableMode
 import com.pavel.rebrain.viewmodel.ProductListViewModel
 import com.pavel.rebrain.viewmodel.ProductListViewModelFactory
 import kotlinx.android.synthetic.main.fragment_main_tab.*
@@ -105,10 +106,10 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         setHasOptionsMenu(true)
     }
 
-    private fun changeMenuIcon(mode: FoodListRecyclerViewAdapter.TableMode) {
+    private fun changeMenuIcon(mode: TableMode) {
         val iconResId = when (mode) {
-            FoodListRecyclerViewAdapter.TableMode.LIST -> R.drawable.ic_menu_grid
-            FoodListRecyclerViewAdapter.TableMode.GRID -> R.drawable.ic_menu_list
+            TableMode.LIST -> R.drawable.ic_menu_grid
+            TableMode.GRID -> R.drawable.ic_menu_list
         }
         val item = optionsMenu?.findItem(R.id.menu_button)
         item?.setIcon(iconResId)
@@ -123,13 +124,13 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         recyclerView.adapter = adapter
     }
 
-    private fun setAdapterMode(mode: FoodListRecyclerViewAdapter.TableMode) {
+    private fun setAdapterMode(mode: TableMode) {
 
         while (recyclerView.itemDecorationCount > 0) {
             recyclerView.removeItemDecorationAt(0)
         }
 
-        if (mode == FoodListRecyclerViewAdapter.TableMode.GRID) {
+        if (mode == TableMode.GRID) {
             recyclerView.layoutManager = GridLayoutManager(activity, 2)
             // todo: добавить перевод spacing из dp -> px
             recyclerView.addItemDecoration(

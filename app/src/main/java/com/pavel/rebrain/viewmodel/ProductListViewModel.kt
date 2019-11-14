@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pavel.rebrain.domain.Product
 import com.pavel.rebrain.repository.ProductsRepository
-import com.pavel.rebrain.screen.main.list.FoodListRecyclerViewAdapter
+import com.pavel.rebrain.domain.TableMode
 
 /**
  * Класс для связи данных и интерфейса
@@ -13,7 +13,7 @@ class ProductListViewModel(private var productsRepository: ProductsRepository) :
 
     val productList = MutableLiveData<MutableList<Product>>()
     val productsViewMode =
-        MutableLiveData<FoodListRecyclerViewAdapter.TableMode>()
+        MutableLiveData<TableMode>()
 
     fun getProducts() {
         productList.value = productsRepository.getProducts()

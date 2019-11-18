@@ -3,7 +3,6 @@ package com.pavel.rebrain.screen.main.tabs
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.os.Handler
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -13,10 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pavel.rebrain.App
 import com.pavel.rebrain.R
+import com.pavel.rebrain.domain.TableMode
 import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
 import com.pavel.rebrain.screen.main.list.FoodListRecyclerViewAdapter
-import com.pavel.rebrain.domain.TableMode
 import com.pavel.rebrain.viewmodel.ProductListViewModel
 import com.pavel.rebrain.viewmodel.ProductListViewModelFactory
 import kotlinx.android.synthetic.main.fragment_main_tab.*
@@ -55,6 +54,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
                 .get(ProductListViewModel::class.java)
 
         productListViewModel.productList.observe(this, Observer { products ->
+            swipeRefreshLayout.isRefreshing = false
             adapter.setFoodList(products)
         })
 
@@ -67,8 +67,6 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         initRv()
         initSwipeToRefresh()
     }
-
-
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -87,7 +85,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_tab, menu)
         optionsMenu = menu
-        productListViewModel.getProductsViewMode()
+        productListViewModel.requestProductsViewMode()
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -120,7 +118,8 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         adapter = FoodListRecyclerViewAdapter(mutableListOf()) { id ->
             toast("$id")
         }
-        productListViewModel.getProducts()
+        swipeRefreshLayout.isRefreshing = true
+        productListViewModel.requestProducts()
         recyclerView.adapter = adapter
     }
 
@@ -150,11 +149,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private fun initSwipeToRefresh() {
         swipeRefreshLayout.setOnRefreshListener {
-            // эмуляция ожидания загрузки
-            Handler().postDelayed({
-                productListViewModel.getProducts()
-                swipeRefreshLayout.isRefreshing = false
-            }, 2000)
+            productListViewModel.requestProducts()
         }
     }
 

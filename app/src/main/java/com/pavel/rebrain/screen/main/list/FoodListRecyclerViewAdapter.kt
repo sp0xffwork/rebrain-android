@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayout
 import com.pavel.rebrain.App
 import com.pavel.rebrain.R
 import com.pavel.rebrain.domain.Product
+import com.pavel.rebrain.domain.TableMode
 import com.pavel.rebrain.screen.base.BaseActivity
 import com.pavel.rebrain.screen.main.carousel.adapter.CarouselFragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.list_element_carousel.view.*
@@ -26,10 +27,6 @@ import timber.log.Timber
  */
 class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>, private var cartClickListener: (id: Int) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    enum class TableMode {
-        LIST, GRID
-    }
 
     enum class ElementType(val type: Int) {
         CAROUSEL(0), NORMAL(1)

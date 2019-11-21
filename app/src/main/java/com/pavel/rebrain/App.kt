@@ -2,6 +2,7 @@ package com.pavel.rebrain
 
 import android.app.Application
 import com.pavel.rebrain.BuildConfig
+import com.pavel.rebrain.repository.ProductModeRepository
 import com.pavel.rebrain.repository.ProductsRepository
 import timber.log.Timber
 
@@ -11,12 +12,16 @@ import timber.log.Timber
 class App : Application() {
 
     companion object {
-        val APP_LOG_TAG = "FoodApp"
+        const val APP_LOG_TAG = "FoodApp"
         lateinit var instance: App private set
     }
 
     var appRepository = ProductsRepository()
         private set
+
+    val appProductModeRepository: ProductModeRepository by lazy {
+        ProductModeRepository(applicationContext)
+    }
 
     override fun onCreate() {
         super.onCreate()

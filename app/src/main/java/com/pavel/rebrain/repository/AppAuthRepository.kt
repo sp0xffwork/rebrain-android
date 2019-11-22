@@ -6,13 +6,13 @@ import android.content.Context
  * класс логики формирования и хранения данных
  */
 class AppAuthRepository(val context: Context) {
-    private val appAuthRepository = AppAuthStorage()
+    private val appAuthStorage = AppAuthStorage()
 
     fun getAuthFlag(): Boolean {
-        return appAuthRepository.read(context)
+        return appAuthStorage.read(context)
     }
 
     fun setAuthFlag(flag: Boolean) {
-        appAuthRepository.save(context, flag)
+        appAuthStorage.save(context, flag)
     }
 }

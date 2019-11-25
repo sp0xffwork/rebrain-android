@@ -50,7 +50,13 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         super.onViewCreated(view, savedInstanceState)
 
         productListViewModel =
-            ViewModelProviders.of(this, ProductListViewModelFactory(App.instance.appRepository))
+            ViewModelProviders.of(
+                this,
+                ProductListViewModelFactory(
+                    App.instance.appRepository,
+                    App.instance.appProductModeRepository
+                )
+            )
                 .get(ProductListViewModel::class.java)
 
         productListViewModel.productList.observe(this, Observer { products ->

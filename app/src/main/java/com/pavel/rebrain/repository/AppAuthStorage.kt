@@ -6,14 +6,14 @@ import com.pavel.rebrain.util.PreferenceHelper
 /**
  * Класс должен сохранять в SharedPreferences флаг авторизованности пользователя
  */
-class AppAuthStorage {
+class AppAuthStorage : Storage<Boolean> {
 
-    fun read(context: Context): Boolean {
+    override fun read(context: Context): Boolean {
         return PreferenceHelper.getBoolean(context, PreferenceHelper.APP_AUTH_FLAG)
     }
 
-    fun save(context: Context, flag: Boolean) {
-        PreferenceHelper.putBoolean(context, PreferenceHelper.APP_AUTH_FLAG, flag)
+    override fun save(context: Context, data: Boolean) {
+        PreferenceHelper.putBoolean(context, PreferenceHelper.APP_AUTH_FLAG, data)
     }
 
 }

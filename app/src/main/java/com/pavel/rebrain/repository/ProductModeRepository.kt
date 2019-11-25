@@ -7,7 +7,7 @@ import com.pavel.rebrain.domain.TableMode
  * класс логики формирования и хранения данных
  */
 class ProductModeRepository(val context: Context) {
-    private val productModeStorage = ProductModeStorage()
+    private val productModeStorage: Storage<TableMode> = ProductModeStorage()
 
     fun getProductsViewMode(): TableMode {
         return productModeStorage.read(context)

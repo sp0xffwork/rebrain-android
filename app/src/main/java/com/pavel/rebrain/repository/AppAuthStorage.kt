@@ -1,6 +1,6 @@
 package com.pavel.rebrain.repository
 
-import android.content.Context
+import com.pavel.rebrain.App
 import com.pavel.rebrain.util.PreferenceHelper
 
 /**
@@ -8,12 +8,12 @@ import com.pavel.rebrain.util.PreferenceHelper
  */
 class AppAuthStorage : Storage<Boolean> {
 
-    override fun read(context: Context): Boolean {
-        return PreferenceHelper.getBoolean(context, PreferenceHelper.APP_AUTH_FLAG)
+    override fun read(): Boolean {
+        return App.instance.preferenceHelper.getBoolean(PreferenceHelper.APP_AUTH_FLAG)
     }
 
-    override fun save(context: Context, data: Boolean) {
-        PreferenceHelper.putBoolean(context, PreferenceHelper.APP_AUTH_FLAG, data)
+    override fun save(data: Boolean) {
+        App.instance.preferenceHelper.putBoolean(PreferenceHelper.APP_AUTH_FLAG, data)
     }
 
 }

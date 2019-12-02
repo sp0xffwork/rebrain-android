@@ -3,8 +3,7 @@ package com.pavel.rebrain.repository
 /**
  * класс логики формирования и хранения данных
  */
-class AppAuthRepository() {
-    private val appAuthStorage: Storage<Boolean> = AppAuthStorage()
+class AppAuthRepository(val appAuthStorage: Storage<Boolean>) {
 
     fun getAuthFlag(): Boolean {
         return appAuthStorage.read()

@@ -1,26 +1,24 @@
 package com.pavel.rebrain.repository
 
-import android.content.Context
 import com.pavel.rebrain.domain.TableMode
 
 /**
  * класс логики формирования и хранения данных
  */
-class ProductModeRepository(val context: Context) {
-    private val productModeStorage = ProductModeStorage()
+class ProductModeRepository(val productModeStorage: Storage<TableMode>) {
 
     fun getProductsViewMode(): TableMode {
-        return productModeStorage.read(context)
+        return productModeStorage.read()
     }
 
     fun changeProductsViewMode(): TableMode {
-        val storedMode = productModeStorage.read(context)
+        val storedMode = productModeStorage.read()
         val changedMode = if (storedMode == TableMode.GRID) {
             TableMode.LIST
         } else {
             TableMode.GRID
         }
-        productModeStorage.save(context, changedMode)
+        productModeStorage.save(changedMode)
         return changedMode
     }
 }

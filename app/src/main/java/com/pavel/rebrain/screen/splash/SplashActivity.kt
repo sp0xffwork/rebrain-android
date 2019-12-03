@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.pavel.rebrain.App
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseActivity
 import com.pavel.rebrain.screen.intro.IntroActivity
@@ -43,7 +44,7 @@ class SplashActivity : BaseActivity("SplashActivity"), CoroutineScope {
             val isNeedShowIntro = true; //PreferenceHelper.getBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO)
             if (isNeedShowIntro) {
                 IntroActivity.start(this@SplashActivity)
-                PreferenceHelper.putBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO, false)
+                App.instance.preferenceHelper.putBoolean(PreferenceHelper.IS_NEED_SHOW_INTRO, false)
             } else {
                 MainActivity.start(this@SplashActivity)
             }

@@ -1,9 +1,10 @@
 package com.pavel.rebrain
 
 import android.app.Application
-import com.pavel.rebrain.BuildConfig
 import com.pavel.rebrain.repository.ProductModeRepository
+import com.pavel.rebrain.repository.ProductModeStorage
 import com.pavel.rebrain.repository.ProductsRepository
+import com.pavel.rebrain.util.PreferenceHelper
 import timber.log.Timber
 
 /**
@@ -16,12 +17,9 @@ class App : Application() {
         lateinit var instance: App private set
     }
 
-    var appRepository = ProductsRepository()
-        private set
-
-    val appProductModeRepository: ProductModeRepository by lazy {
-        ProductModeRepository(applicationContext)
-    }
+    val appRepository = ProductsRepository()
+    lateinit var appProductModeRepository: ProductModeRepository
+    lateinit var preferenceHelper: PreferenceHelper
 
     override fun onCreate() {
         super.onCreate()
@@ -29,6 +27,9 @@ class App : Application() {
             Timber.plant(Timber.DebugTree())
         }
         instance = this
+
+        preferenceHelper = PreferenceHelper(applicationContext)
+        appProductModeRepository = ProductModeRepository(ProductModeStorage(preferenceHelper))
     }
 
 

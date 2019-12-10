@@ -9,7 +9,6 @@ import dagger.Provides
 /**
  * будет создавать имплементацию AppAuthStorage
  */
-
 @Module
 class AppAuthStorageModule {
 

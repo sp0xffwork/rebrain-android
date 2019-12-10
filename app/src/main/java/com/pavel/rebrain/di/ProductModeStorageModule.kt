@@ -10,7 +10,6 @@ import dagger.Provides
 /**
  * будет создавать имплементацию ProductModeStorage
  */
-
 @Module
 class ProductModeStorageModule {
 

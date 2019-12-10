@@ -8,7 +8,6 @@ import dagger.Provides
 /**
  * будет создавать имплементацию PreferenceHelper
  */
-
 @Module
 class PreferenceHelperModule {
 

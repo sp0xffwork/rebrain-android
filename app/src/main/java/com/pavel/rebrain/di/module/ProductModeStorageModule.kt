@@ -1,4 +1,4 @@
-package com.pavel.rebrain.di
+package com.pavel.rebrain.di.module
 
 import com.pavel.rebrain.domain.TableMode
 import com.pavel.rebrain.repository.ProductModeStorage

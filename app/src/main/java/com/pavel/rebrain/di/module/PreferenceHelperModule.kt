@@ -1,4 +1,4 @@
-package com.pavel.rebrain.di
+package com.pavel.rebrain.di.module
 
 import android.content.Context
 import com.pavel.rebrain.util.PreferenceHelper

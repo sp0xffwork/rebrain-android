@@ -1,4 +1,4 @@
-package com.pavel.rebrain.di
+package com.pavel.rebrain.di.module
 
 import com.pavel.rebrain.repository.AppAuthStorage
 import com.pavel.rebrain.repository.Storage

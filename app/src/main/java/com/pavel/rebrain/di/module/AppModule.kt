@@ -1,7 +1,6 @@
 package com.pavel.rebrain.di.module
 
 import android.content.Context
-import com.pavel.rebrain.App
 import dagger.Module
 import dagger.Provides
 
@@ -9,9 +8,9 @@ import dagger.Provides
  * будет хранить контекст приложения
  */
 @Module
-class AppModule {
+class AppModule(val context: Context) {
 
     @Provides
-    fun provideContext(app: App): Context = app
+    fun provideContext(): Context = context
 
 }

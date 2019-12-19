@@ -1,11 +1,12 @@
 package com.pavel.rebrain.repository
 
 import com.pavel.rebrain.domain.TableMode
+import javax.inject.Inject
 
 /**
  * класс логики формирования и хранения данных
  */
-class ProductModeRepository(val productModeStorage: Storage<TableMode>) {
+class ProductModeRepository @Inject constructor(private val productModeStorage: Storage<TableMode>) {
 
     fun getProductsViewMode(): TableMode {
         return productModeStorage.read()

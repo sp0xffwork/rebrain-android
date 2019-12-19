@@ -3,18 +3,18 @@ package com.pavel.rebrain.screen.splash
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import com.pavel.rebrain.App
 import com.pavel.rebrain.R
+import com.pavel.rebrain.di.component.DaggerAppComponent
+import com.pavel.rebrain.di.module.AppModule
 import com.pavel.rebrain.screen.base.BaseActivity
 import com.pavel.rebrain.screen.intro.IntroActivity
 import com.pavel.rebrain.screen.main.MainActivity
+import com.pavel.rebrain.util.PreferenceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import com.pavel.rebrain.util.PreferenceHelper
-import timber.log.Timber
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
@@ -23,6 +23,8 @@ import kotlin.coroutines.CoroutineContext
  */
 class SplashActivity : BaseActivity("SplashActivity"), CoroutineScope {
 
+    @Inject
+    lateinit var preferenceHelper: PreferenceHelper
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Default
 
@@ -30,6 +32,8 @@ class SplashActivity : BaseActivity("SplashActivity"), CoroutineScope {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_splash)
+
+        DaggerAppComponent.builder().appModule(AppModule(this)).build().inject(this)
 
         // если sdk < 19, то fullscreen. в остальных случаях прозрачный Status Bar заданный в настройках стиля
         if (Build.VERSION.SDK_INT < 19) {
@@ -41,10 +45,10 @@ class SplashActivity : BaseActivity("SplashActivity"), CoroutineScope {
             delay(500)
             // временно. для того, чтобы выполнить задание на IntroActivity
             // TODO убрать в следующем задании
-            val isNeedShowIntro = true; //PreferenceHelper.getBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO)
+            val isNeedShowIntro =true; //PreferenceHelper.getBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO)
             if (isNeedShowIntro) {
                 IntroActivity.start(this@SplashActivity)
-                App.instance.preferenceHelper.putBoolean(PreferenceHelper.IS_NEED_SHOW_INTRO, false)
+                preferenceHelper.putBoolean(PreferenceHelper.IS_NEED_SHOW_INTRO, false)
             } else {
                 MainActivity.start(this@SplashActivity)
             }

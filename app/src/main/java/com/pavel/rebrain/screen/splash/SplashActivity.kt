@@ -4,7 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import com.pavel.rebrain.R
-import com.pavel.rebrain.di.component.DaggerAppComponent
+import com.pavel.rebrain.di.component.DaggerSplashActivityComponent
 import com.pavel.rebrain.di.module.AppModule
 import com.pavel.rebrain.screen.base.BaseActivity
 import com.pavel.rebrain.screen.intro.IntroActivity
@@ -33,7 +33,7 @@ class SplashActivity : BaseActivity("SplashActivity"), CoroutineScope {
 
         setContentView(R.layout.activity_splash)
 
-        DaggerAppComponent.builder().appModule(AppModule(this)).build().inject(this)
+        DaggerSplashActivityComponent.builder().appModule(AppModule(this)).build().inject(this)
 
         // если sdk < 19, то fullscreen. в остальных случаях прозрачный Status Bar заданный в настройках стиля
         if (Build.VERSION.SDK_INT < 19) {
@@ -45,7 +45,8 @@ class SplashActivity : BaseActivity("SplashActivity"), CoroutineScope {
             delay(500)
             // временно. для того, чтобы выполнить задание на IntroActivity
             // TODO убрать в следующем задании
-            val isNeedShowIntro =true; //PreferenceHelper.getBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO)
+            val isNeedShowIntro =
+                true; //PreferenceHelper.getBoolean(this@SplashActivity, PreferenceHelper.IS_NEED_SHOW_INTRO)
             if (isNeedShowIntro) {
                 IntroActivity.start(this@SplashActivity)
                 preferenceHelper.putBoolean(PreferenceHelper.IS_NEED_SHOW_INTRO, false)

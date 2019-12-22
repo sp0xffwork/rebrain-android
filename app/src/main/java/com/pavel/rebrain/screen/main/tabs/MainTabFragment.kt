@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pavel.rebrain.App
 import com.pavel.rebrain.R
-import com.pavel.rebrain.di.component.DaggerAppComponent
+import com.pavel.rebrain.di.component.DaggerMainTabFragmentComponent
 import com.pavel.rebrain.di.module.AppModule
 import com.pavel.rebrain.domain.TableMode
 import com.pavel.rebrain.screen.base.BaseFragment
@@ -79,7 +79,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         } else {
             throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
-        DaggerAppComponent.builder().appModule(AppModule(context)).build().inject(this)
+        DaggerMainTabFragmentComponent.builder().appModule(AppModule(context)).build().inject(this)
     }
 
     override fun onDetach() {

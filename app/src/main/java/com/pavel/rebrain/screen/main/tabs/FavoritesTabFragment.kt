@@ -29,7 +29,7 @@ class FavoritesTabFragment : BaseFragment("FavoritesTabFragment") {
         return inflater.inflate(R.layout.fragment_favorites_tab, container, false)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             listener = context

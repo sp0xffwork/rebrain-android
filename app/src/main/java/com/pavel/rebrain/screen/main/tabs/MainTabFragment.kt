@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pavel.rebrain.App
 import com.pavel.rebrain.R
+import com.pavel.rebrain.di.component.DaggerMainTabFragmentComponent
+import com.pavel.rebrain.di.module.AppModule
 import com.pavel.rebrain.domain.TableMode
 import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
@@ -22,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_main_tab.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.jetbrains.anko.support.v4.toast
 import timber.log.Timber
+import javax.inject.Inject
 
 
 /**
@@ -33,6 +36,8 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     private var listener: OnFragmentInteractionListener? = null
     private lateinit var adapter: FoodListRecyclerViewAdapter
     private lateinit var productListViewModel: ProductListViewModel
+    @Inject
+    lateinit var factory: ProductListViewModelFactory
     private var optionsMenu: Menu? = null
 
     override fun getFragmentTag(): String {
@@ -50,14 +55,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         super.onViewCreated(view, savedInstanceState)
 
         productListViewModel =
-            ViewModelProviders.of(
-                this,
-                ProductListViewModelFactory(
-                    App.instance.appRepository,
-                    App.instance.appProductModeRepository
-                )
-            )
-                .get(ProductListViewModel::class.java)
+            ViewModelProviders.of(this, factory).get(ProductListViewModel::class.java)
 
         productListViewModel.productList.observe(this, Observer { products ->
             swipeRefreshLayout.isRefreshing = false
@@ -74,13 +72,14 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         initSwipeToRefresh()
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
+        DaggerMainTabFragmentComponent.builder().appModule(AppModule(context)).build().inject(this)
     }
 
     override fun onDetach() {

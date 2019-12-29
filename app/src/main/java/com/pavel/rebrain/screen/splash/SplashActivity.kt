@@ -40,7 +40,6 @@ class SplashActivity : BaseActivity("SplashActivity"), CoroutineScope {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         }
 
-
         launch {
             delay(500)
             // временно. для того, чтобы выполнить задание на IntroActivity

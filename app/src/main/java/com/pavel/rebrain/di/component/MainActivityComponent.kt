@@ -1,12 +1,12 @@
 package com.pavel.rebrain.di.component
 
+import com.pavel.rebrain.di.scope.PerScreen
 import dagger.Component
-import javax.inject.Singleton
 
 /**
  * компонент для MainActivity
  */
 @Component()
-@Singleton
+@PerScreen
 interface MainActivityComponent {
 }

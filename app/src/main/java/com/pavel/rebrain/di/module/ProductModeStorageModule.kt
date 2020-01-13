@@ -1,7 +1,7 @@
 package com.pavel.rebrain.di.module
 
 import android.content.Context
-import com.pavel.rebrain.di.scope.PerScreen
+import com.pavel.rebrain.di.scope.PerApplication
 import com.pavel.rebrain.domain.TableMode
 import com.pavel.rebrain.repository.ProductModeStorage
 import com.pavel.rebrain.repository.Storage
@@ -16,9 +16,9 @@ import dagger.Provides
 class ProductModeStorageModule {
 
     @Provides
-    @PerScreen
-    fun provideStorage(context: Context): Storage<TableMode> =
-        ProductModeStorage(PreferenceHelper(context))
+    @PerApplication
+    fun provideStorage(preferenceHelper: PreferenceHelper): Storage<TableMode> =
+        ProductModeStorage(preferenceHelper)
 
 }
 

@@ -1,12 +1,12 @@
 package com.pavel.rebrain.di.component
 
 import com.pavel.rebrain.di.scope.PerScreen
-import dagger.Component
+import dagger.Subcomponent
 
 /**
  * компонент фрагмента вкладки favorites
  */
-@Component()
+@Subcomponent()
 @PerScreen
 interface FavoritesTabFragmentComponent {
 }

@@ -1,12 +1,12 @@
 package com.pavel.rebrain.di.component
 
 import com.pavel.rebrain.di.scope.PerScreen
-import dagger.Component
+import dagger.Subcomponent
 
 /**
  * компонент для MainActivity
  */
-@Component()
+@Subcomponent()
 @PerScreen
 interface MainActivityComponent {
 }

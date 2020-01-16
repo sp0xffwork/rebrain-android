@@ -1,12 +1,12 @@
 package com.pavel.rebrain.di.component
 
-import dagger.Component
-import javax.inject.Singleton
+import com.pavel.rebrain.di.scope.PerScreen
+import dagger.Subcomponent
 
 /**
  * компонент фрагмента вкладки favorites
  */
-@Component()
-@Singleton
+@Subcomponent()
+@PerScreen
 interface FavoritesTabFragmentComponent {
 }

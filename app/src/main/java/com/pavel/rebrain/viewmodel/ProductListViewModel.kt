@@ -20,11 +20,15 @@ class ProductListViewModel(
     val productList = MutableLiveData<MutableList<Product>>()
     val productsViewMode = MutableLiveData<TableMode>()
 
-    fun requestProducts() {
-        // эмуляция ожидания загрузки
-        Handler().postDelayed({
+    fun requestProducts(isNeedRefresh: Boolean) {
+        if (isNeedRefresh) {
+            // эмуляция ожидания загрузки
+            Handler().postDelayed({
+                productList.value = productsRepository.updateProducts()
+            }, 2000)
+        } else {
             productList.value = productsRepository.getProducts()
-        }, 2000)
+        }
     }
 
     fun requestProductsViewMode() {

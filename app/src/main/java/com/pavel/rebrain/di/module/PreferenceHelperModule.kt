@@ -1,10 +1,10 @@
 package com.pavel.rebrain.di.module
 
 import android.content.Context
+import com.pavel.rebrain.di.scope.PerApplication
 import com.pavel.rebrain.util.PreferenceHelper
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 /**
  * будет создавать имплементацию PreferenceHelper
@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class PreferenceHelperModule {
 
     @Provides
-    @Singleton
+    @PerApplication
     fun providePreferenceHelper(context: Context): PreferenceHelper =
         PreferenceHelper(context)
 

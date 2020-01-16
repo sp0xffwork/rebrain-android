@@ -1,6 +1,9 @@
 package com.pavel.rebrain
 
 import android.app.Application
+import com.pavel.rebrain.di.component.AppComponent
+import com.pavel.rebrain.di.component.DaggerAppComponent
+import com.pavel.rebrain.di.module.AppModule
 import timber.log.Timber
 
 /**
@@ -13,20 +16,18 @@ class App : Application() {
         lateinit var instance: App private set
     }
 
-    //val appRepository = ProductsRepository()
-    //lateinit var appProductModeRepository: ProductModeRepository
-    //lateinit var preferenceHelper: PreferenceHelper
+    lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+
+        appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(this))
+            .build()
+
         instance = this
-
-        //preferenceHelper = PreferenceHelper(applicationContext)
-        //appProductModeRepository = ProductModeRepository(ProductModeStorage(preferenceHelper))
     }
-
-
 }

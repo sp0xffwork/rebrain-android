@@ -1,9 +1,9 @@
 package com.pavel.rebrain.di.module
 
 import android.content.Context
+import com.pavel.rebrain.di.scope.PerApplication
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 /**
  * будет хранить контекст приложения
@@ -12,7 +12,7 @@ import javax.inject.Singleton
 class AppModule(val context: Context) {
 
     @Provides
-    @Singleton
+    @PerApplication
     fun provideContext(): Context = context
 
 }

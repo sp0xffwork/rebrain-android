@@ -9,8 +9,15 @@ import javax.inject.Inject
  */
 class ProductsRepository @Inject constructor() {
 
+    var productList: MutableList<Product> = mutableListOf()
+
     fun getProducts(): MutableList<Product> {
-        return Generator().getProducts()
+        return productList
+    }
+
+    fun updateProducts(): MutableList<Product> {
+        productList = Generator().getProducts()
+        return productList
     }
 
 }

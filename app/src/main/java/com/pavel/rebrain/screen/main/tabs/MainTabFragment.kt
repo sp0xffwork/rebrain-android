@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pavel.rebrain.App
 import com.pavel.rebrain.R
-import com.pavel.rebrain.di.component.DaggerMainTabFragmentComponent
-import com.pavel.rebrain.di.module.AppModule
 import com.pavel.rebrain.domain.TableMode
 import com.pavel.rebrain.screen.base.BaseFragment
 import com.pavel.rebrain.screen.main.OnFragmentInteractionListener
@@ -68,7 +66,8 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         })
 
         initToolbar()
-        initRv()
+        val isNeedRefresh = (savedInstanceState == null)
+        initRv(isNeedRefresh)
         initSwipeToRefresh()
     }
 
@@ -79,7 +78,12 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         } else {
             throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
-        DaggerMainTabFragmentComponent.builder().appModule(AppModule(context)).build().inject(this)
+
+        val appComponent = App.instance.appComponent
+
+        val mainTabFragmentComponent =
+            appComponent.mainTabFragmentComponent()
+        mainTabFragmentComponent.inject(this)
     }
 
     override fun onDetach() {
@@ -118,13 +122,13 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         item?.setIcon(iconResId)
     }
 
-    private fun initRv() {
+    private fun initRv(isNeedRefresh: Boolean) {
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.initRv")
         adapter = FoodListRecyclerViewAdapter(mutableListOf()) { id ->
             toast("$id")
         }
         swipeRefreshLayout.isRefreshing = true
-        productListViewModel.requestProducts()
+        productListViewModel.requestProducts(isNeedRefresh)
         recyclerView.adapter = adapter
     }
 
@@ -154,7 +158,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private fun initSwipeToRefresh() {
         swipeRefreshLayout.setOnRefreshListener {
-            productListViewModel.requestProducts()
+            productListViewModel.requestProducts(true)
         }
     }
 

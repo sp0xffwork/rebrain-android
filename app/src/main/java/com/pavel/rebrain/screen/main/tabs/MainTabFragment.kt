@@ -126,6 +126,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.initRv")
         adapter = FoodListRecyclerViewAdapter(mutableListOf()) { id ->
             toast("$id")
+            productListViewModel.addFavorite(id)
         }
         swipeRefreshLayout.isRefreshing = true
         productListViewModel.requestProducts(isNeedRefresh)

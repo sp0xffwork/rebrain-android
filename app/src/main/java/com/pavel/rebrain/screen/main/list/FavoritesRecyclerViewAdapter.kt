@@ -33,7 +33,7 @@ class FavoritesRecyclerViewAdapter(
 
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_fav_element_row, parent, false)
-        val holder = NormalHolder(parent, v, starClickListener)
+        val holder = FavoriteElementHolder(parent, v, starClickListener)
         Timber.tag(App.APP_LOG_TAG).i("onCreateViewHolder ${parent.context}")
         return holder
     }
@@ -44,13 +44,13 @@ class FavoritesRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         Timber.tag(App.APP_LOG_TAG).i("onBindViewHolder $position")
-        (holder as NormalHolder).bind(favoritesList[position])
+        (holder as FavoriteElementHolder).bind(favoritesList[position])
     }
 
     /**
      * Holder для строк, связанных с продуктами
      */
-    class NormalHolder(
+    class FavoriteElementHolder(
         private val parent: ViewGroup,
         v: View,
         private val cartClickListener: (id: Int) -> Unit

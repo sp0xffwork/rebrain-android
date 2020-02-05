@@ -32,14 +32,25 @@ import javax.inject.Inject
 class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private var listener: OnFragmentInteractionListener? = null
-    private lateinit var adapter: FoodListRecyclerViewAdapter
+
+    private val adapter = FoodListRecyclerViewAdapter(mutableListOf()) { id ->
+        toast("$id")
+        productListViewModel.addFavorite(id)
+    }
+
     private lateinit var productListViewModel: ProductListViewModel
     @Inject
     lateinit var factory: ProductListViewModelFactory
     private var optionsMenu: Menu? = null
 
+
+    companion object {
+        const val fragmentTag = "MainTabFragment"
+        fun newInstance() = MainTabFragment()
+    }
+
     override fun getFragmentTag(): String {
-        return "MainTabFragment"
+        return fragmentTag
     }
 
     override fun onCreateView(
@@ -108,7 +119,7 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
     }
 
     private fun initToolbar() {
-        toolbar.title = "FoodApp"
+        toolbar.title = getString(R.string.app_name)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         setHasOptionsMenu(true)
     }
@@ -124,10 +135,6 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
 
     private fun initRv(isNeedRefresh: Boolean) {
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.initRv")
-        adapter = FoodListRecyclerViewAdapter(mutableListOf()) { id ->
-            toast("$id")
-            productListViewModel.addFavorite(id)
-        }
         swipeRefreshLayout.isRefreshing = true
         productListViewModel.requestProducts(isNeedRefresh)
         recyclerView.adapter = adapter
@@ -163,10 +170,6 @@ class MainTabFragment : BaseFragment("MainTabFragment") {
         }
     }
 
-    companion object {
-        fun newInstance() =
-            MainTabFragment()
-    }
 }
 
 /**

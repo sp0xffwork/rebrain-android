@@ -30,20 +30,28 @@ import javax.inject.Inject
 class FavoritesTabFragment : BaseFragment("FavoritesTabFragment") {
     private var listener: OnFragmentInteractionListener? = null
 
-    private lateinit var adapter: FavoritesRecyclerViewAdapter
+    private val adapter = FavoritesRecyclerViewAdapter { id ->
+        toast("$id")
+        favoritesViewModel.removeFavorite(id)
+    }
+
     private lateinit var favoritesViewModel: FavoritesViewModel
     @Inject
     lateinit var factory: FavoritesViewModelFactory
 
+    companion object {
+        const val fragmentTag = "FavoritesTabFragment"
+        fun newInstance() = FavoritesTabFragment()
+    }
+
     override fun getFragmentTag(): String {
-        return "FavoritesTabFragment"
+        return fragmentTag
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favorites_tab, container, false)
     }
 
@@ -69,7 +77,7 @@ class FavoritesTabFragment : BaseFragment("FavoritesTabFragment") {
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
 
         val appComponent = App.instance.appComponent
@@ -85,16 +93,12 @@ class FavoritesTabFragment : BaseFragment("FavoritesTabFragment") {
     }
 
     private fun initToolbar() {
-        toolbar.title = "FoodApp"
+        toolbar.title = getString(R.string.app_name)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
     private fun initRv(isNeedRefresh: Boolean) {
         Timber.tag(App.APP_LOG_TAG).i("$logTitle.initRv")
-        adapter = FavoritesRecyclerViewAdapter(mutableListOf()) { id ->
-            toast("$id")
-            favoritesViewModel.removeFavorite(id)
-        }
         recyclerView.layoutManager = LinearLayoutManager(activity)
         swipeRefreshLayout.isRefreshing = true
         favoritesViewModel.requestFavorites(isNeedRefresh)
@@ -107,8 +111,4 @@ class FavoritesTabFragment : BaseFragment("FavoritesTabFragment") {
         }
     }
 
-    companion object {
-        fun newInstance() =
-            FavoritesTabFragment()
-    }
 }

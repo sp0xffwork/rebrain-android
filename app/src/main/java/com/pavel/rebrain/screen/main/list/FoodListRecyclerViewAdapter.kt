@@ -1,6 +1,5 @@
 package com.pavel.rebrain.screen.main.list
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +24,10 @@ import timber.log.Timber
 /**
  * Adapter для RecyclerView для отображения списка продуктов
  */
-class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>, private var cartClickListener: (id: Int) -> Unit) :
+class FoodListRecyclerViewAdapter(
+    private var foodList: MutableList<Product>,
+    private var cartClickListener: (id: Int) -> Unit
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class ElementType(val type: Int) {
@@ -91,7 +93,11 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>, pr
     /**
      * Holder для строк, связанных с продуктами
      */
-    class NormalHolder(private val parent: ViewGroup, v: View, private val cartClickListener: (id: Int) -> Unit) : RecyclerView.ViewHolder(v) {
+    class NormalHolder(
+        private val parent: ViewGroup,
+        v: View,
+        private val cartClickListener: (id: Int) -> Unit
+    ) : RecyclerView.ViewHolder(v) {
 
         private var productId: Int = -1
         private var productNameView: TextView = v.textProductName
@@ -108,8 +114,7 @@ class FoodListRecyclerViewAdapter(private var foodList: MutableList<Product>, pr
         fun bind(data: Product) {
             productId = data.id
             productNameView.text = data.name
-            @SuppressLint("SetTextI18n")
-            productPriceView.text = "${data.id * 10}"
+            productPriceView.text = data.price.toString()
 
             Glide
                 .with(parent.context)

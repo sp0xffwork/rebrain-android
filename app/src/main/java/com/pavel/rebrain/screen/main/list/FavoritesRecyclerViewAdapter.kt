@@ -1,6 +1,5 @@
 package com.pavel.rebrain.screen.main.list
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +18,11 @@ import timber.log.Timber
  * Adapter для RecyclerView для отображения списка избранных продуктов
  */
 class FavoritesRecyclerViewAdapter(
-    private var favoritesList: MutableList<Product>,
     private var starClickListener: (id: Int) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var favoritesList: MutableList<Product>? = null
 
     fun setFoodList(foodList: MutableList<Product>) {
         this.favoritesList = foodList
@@ -39,12 +39,14 @@ class FavoritesRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return favoritesList.size
+        return favoritesList?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         Timber.tag(App.APP_LOG_TAG).i("onBindViewHolder $position")
-        (holder as FavoriteElementHolder).bind(favoritesList[position])
+        favoritesList?.let {
+            (holder as FavoriteElementHolder).bind(it[position])
+        }
     }
 
     /**
@@ -71,13 +73,12 @@ class FavoritesRecyclerViewAdapter(
         fun bind(data: Product) {
             productId = data.id
             productNameView.text = data.name
-            @SuppressLint("SetTextI18n")
-            productPriceView.text = "${data.id * 10}"
+            productPriceView.text = data.price.toString()
 
             Glide
                 .with(parent.context)
                 .load(
-                    when (data.id % 4) {
+                    when (data.pictureId) {
                         0 -> R.drawable.pic_1
                         1 -> R.drawable.pic_2
                         2 -> R.drawable.pic_3

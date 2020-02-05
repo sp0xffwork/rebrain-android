@@ -58,8 +58,8 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
         val currentFragment = supportFragmentManager.findFragmentById(R.id.container)
         currentFragment?.let {
             when ((it as? BaseFragment)?.getFragmentTag()) {
-                "MainTabFragment" -> bottomBar.setCheckedButton(BottomBar.MainTabType.MAIN)
-                "FavoritesTabFragment" -> bottomBar.setCheckedButton(BottomBar.MainTabType.FAVORITES)
+                MainTabFragment.fragmentTag -> bottomBar.setCheckedButton(BottomBar.MainTabType.MAIN)
+                FavoritesTabFragment.fragmentTag -> bottomBar.setCheckedButton(BottomBar.MainTabType.FAVORITES)
             }
         }
     }

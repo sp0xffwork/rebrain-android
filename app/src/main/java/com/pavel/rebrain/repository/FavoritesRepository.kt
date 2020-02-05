@@ -1,5 +1,7 @@
 package com.pavel.rebrain.repository
 
+import android.os.Handler
+import androidx.lifecycle.MutableLiveData
 import com.pavel.rebrain.domain.Product
 
 /**
@@ -11,10 +13,15 @@ class FavoritesRepository {
 
     /**
      * возвращает список избранных продуктов
-     * @return MutableList<Product>
      */
-    fun getFavorites(): MutableList<Product> {
-        return favoritesList
+    fun getFavorites(favoritesLiveData: MutableLiveData<MutableList<Product>>, isNeedDelay: Boolean) {
+        if (isNeedDelay) {
+            Handler().postDelayed({
+                favoritesLiveData.value = favoritesList
+            }, 2000)
+        } else {
+            favoritesLiveData.value = favoritesList
+        }
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.pavel.rebrain.viewmodel
 
-import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pavel.rebrain.domain.Product
@@ -16,17 +15,20 @@ class FavoritesViewModel(
 
     val favoritesList = MutableLiveData<MutableList<Product>>()
 
+    /**
+     * запросить список избранного
+     */
     fun requestFavorites(isNeedRefresh: Boolean) {
         if (isNeedRefresh) {
-            // эмуляция ожидания загрузки
-            Handler().postDelayed({
-                favoritesList.value = favoritesRepository.getFavorites()
-            }, 2000)
+            favoritesRepository.getFavorites(favoritesList, true)
         } else {
-            favoritesList.value = favoritesRepository.getFavorites()
+            favoritesRepository.getFavorites(favoritesList, false)
         }
     }
 
+    /**
+     * удалить продут из избранного
+     */
     fun removeFavorite(id: Int) {
         val favorites = favoritesList.value
         val favorite = favorites?.find {

@@ -19,10 +19,9 @@ class FavoritesViewModel(
      * запросить список избранного
      */
     fun requestFavorites(isNeedRefresh: Boolean) {
-        if (isNeedRefresh) {
-            favoritesRepository.getFavorites(favoritesList, true)
-        } else {
-            favoritesRepository.getFavorites(favoritesList, false)
+        val observable = favoritesRepository.getFavorites(isNeedRefresh)
+        observable.observeForever { favorites ->
+            favoritesList.value = favorites
         }
     }
 

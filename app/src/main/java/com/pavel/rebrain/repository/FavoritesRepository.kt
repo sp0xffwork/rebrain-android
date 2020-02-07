@@ -9,19 +9,21 @@ import com.pavel.rebrain.domain.Product
  */
 class FavoritesRepository {
 
-    var favoritesList: MutableList<Product> = mutableListOf()
+    private var favoritesList: MutableList<Product> = mutableListOf()
 
     /**
      * возвращает список избранных продуктов
      */
-    fun getFavorites(favoritesLiveData: MutableLiveData<MutableList<Product>>, isNeedDelay: Boolean) {
+    fun getFavorites(isNeedDelay: Boolean): MutableLiveData<MutableList<Product>> {
+        val delayedData = MutableLiveData<MutableList<Product>>()
         if (isNeedDelay) {
             Handler().postDelayed({
-                favoritesLiveData.value = favoritesList
+                delayedData.value = favoritesList
             }, 2000)
         } else {
-            favoritesLiveData.value = favoritesList
+            delayedData.value = favoritesList
         }
+        return delayedData
     }
 
     /**

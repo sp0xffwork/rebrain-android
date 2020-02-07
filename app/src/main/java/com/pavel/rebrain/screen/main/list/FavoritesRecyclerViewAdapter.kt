@@ -22,10 +22,11 @@ class FavoritesRecyclerViewAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var favoritesList: MutableList<Product>? = null
+    private var favoritesList: MutableList<Product> = mutableListOf()
 
-    fun setFoodList(foodList: MutableList<Product>) {
-        this.favoritesList = foodList
+    fun setFoodList(favoritesList: MutableList<Product>) {
+        this.favoritesList.clear()
+        this.favoritesList.addAll(favoritesList)
         notifyDataSetChanged()
     }
 
@@ -39,14 +40,12 @@ class FavoritesRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return favoritesList?.size ?: 0
+        return favoritesList.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         Timber.tag(App.APP_LOG_TAG).i("onBindViewHolder $position")
-        favoritesList?.let {
-            (holder as FavoriteElementHolder).bind(it[position])
-        }
+        (holder as FavoriteElementHolder).bind(favoritesList[position])
     }
 
     /**

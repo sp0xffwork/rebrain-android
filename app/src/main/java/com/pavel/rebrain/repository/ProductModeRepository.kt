@@ -8,10 +8,16 @@ import javax.inject.Inject
  */
 class ProductModeRepository @Inject constructor(private val productModeStorage: Storage<TableMode>) {
 
+    /**
+     * @return режим отображения продуктов (список или grid)
+     */
     fun getProductsViewMode(): TableMode {
         return productModeStorage.read()
     }
 
+    /**
+     * именяет режим отображения продуктов (списко или grid)
+     */
     fun changeProductsViewMode(): TableMode {
         val storedMode = productModeStorage.read()
         val changedMode = if (storedMode == TableMode.GRID) {

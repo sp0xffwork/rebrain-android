@@ -35,9 +35,6 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val fragmentMain: BaseFragment = getFragment(FragmentType.MAIN)
-        //val fragmentFavorites: BaseFragment = getFragment(FragmentType.FAVORITES)
-
         bottomBar.setOnTabClickListener(BottomBar.MainTabType.MAIN) {
             setFragment(FragmentType.MAIN)
         }
@@ -47,9 +44,23 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
         }
 
         if (savedInstanceState == null) {
-            //todo сохранять какой фрагмент активен и восстанавливать при пересоздании activity
+            // при запуске всегда активным будет MAIN
             bottomBar.setCheckedButton(BottomBar.MainTabType.MAIN)
             setFragment(FragmentType.MAIN)
+        }
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+
+        // при повороте экрана активный будет определяться автоматически из сохраненного состояния активити
+        // чтобы выделить активную кнопку, надо определить, какой фагмент активен
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.container)
+        currentFragment?.let {
+            when ((it as? BaseFragment)?.getFragmentTag()) {
+                MainTabFragment.fragmentTag -> bottomBar.setCheckedButton(BottomBar.MainTabType.MAIN)
+                FavoritesTabFragment.fragmentTag -> bottomBar.setCheckedButton(BottomBar.MainTabType.FAVORITES)
+            }
         }
     }
 
@@ -109,5 +120,4 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
             .create()
             .show()
     }
-
 }

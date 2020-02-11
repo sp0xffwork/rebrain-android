@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pavel.rebrain.domain.Product
 import com.pavel.rebrain.domain.TableMode
+import com.pavel.rebrain.repository.FavoritesRepository
 import com.pavel.rebrain.repository.ProductModeRepository
 import com.pavel.rebrain.repository.ProductsRepository
 
@@ -14,7 +15,8 @@ import com.pavel.rebrain.repository.ProductsRepository
  */
 class ProductListViewModel(
     private var productsRepository: ProductsRepository,
-    private var productModeRepository: ProductModeRepository
+    private var productModeRepository: ProductModeRepository,
+    private var favoritesRepository: FavoritesRepository
 ) : ViewModel() {
 
     val productList = MutableLiveData<MutableList<Product>>()
@@ -38,4 +40,14 @@ class ProductListViewModel(
     fun changeProductsViewMode() {
         productsViewMode.value = productModeRepository.changeProductsViewMode()
     }
+
+    fun addFavorite(id: Int) {
+        val product = productList.value?.find {
+            it.id == id
+        }
+        product?.let {
+            favoritesRepository.addFavorite(it)
+        }
+    }
+
 }

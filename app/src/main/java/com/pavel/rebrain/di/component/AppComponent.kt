@@ -9,8 +9,12 @@ import dagger.Component
  */
 @Component(
     modules = [
-        AppModule::class, PreferenceHelperModule::class, ProductModeStorageModule::class,
-        AppAuthStorageModule::class, FavoritesRepositoryModule::class
+        AppModule::class,
+        PreferenceHelperModule::class,
+        ProductModeStorageModule::class,
+        AppAuthStorageModule::class,
+        FavoritesRepositoryModule::class,
+        OkHttpModule::class
     ]
 )
 @PerApplication

@@ -17,10 +17,7 @@ import kotlin.coroutines.CoroutineContext
 /**
  * класс логики формирования и хранения данных
  */
-class ProductsRepository @Inject constructor() : CoroutineScope {
-
-    @Inject
-    lateinit var okHttpClient: OkHttpClient
+class ProductsRepository @Inject constructor(val okHttpClient: OkHttpClient) : CoroutineScope {
 
     @Inject
     @field:Named("baseUrl")
@@ -53,7 +50,7 @@ class ProductsRepository @Inject constructor() : CoroutineScope {
         // сетевых операций на ui thread
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                OkHttpClient().newCall(request).execute()
+                okHttpClient.newCall(request).execute()
                     .use { response ->
                         val serverAnswer = response.body?.string()
                         Timber.tag(App.APP_LOG_TAG)

@@ -44,6 +44,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerVersion"
     //implementation "com.google.dagger:dagger-android:$daggerVersion"
     //implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test:runner:$testRunnerVersion"

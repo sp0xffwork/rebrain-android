@@ -9,6 +9,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 
 /**
  * будет создавать имплементацию Retrofit
@@ -20,14 +21,14 @@ class RetrofitModule {
      */
     @Provides
     @PerApplication
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient, @Named("baseUrl") baseUrl: String): Retrofit {
         val gson: Gson = GsonBuilder()
             .setPrettyPrinting()
             .create()
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://api.android.srwx.net/api/v2/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }

@@ -30,7 +30,7 @@ class OkHttpModule {
     @Provides
     @Named("baseUrl")
     @PerApplication
-    fun provideBaseUrl(): String = "http://api.android.srwx.net/api/v2"
+    fun provideBaseUrl(): String = "http://api.android.srwx.net/api/v2/"
 
     /**
      * интерцептор запросов к api для логирования

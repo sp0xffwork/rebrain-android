@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.pavel.rebrain.api.products.Api
 import com.pavel.rebrain.di.scope.PerApplication
+import com.pavel.rebrain.di.util.Constants
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -21,7 +22,7 @@ class RetrofitModule {
      */
     @Provides
     @PerApplication
-    fun provideRetrofit(okHttpClient: OkHttpClient, @Named("baseUrl") baseUrl: String): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient, @Named(Constants.NAMED_BASE_URL) baseUrl: String): Retrofit {
         val gson: Gson = GsonBuilder()
             .setPrettyPrinting()
             .create()

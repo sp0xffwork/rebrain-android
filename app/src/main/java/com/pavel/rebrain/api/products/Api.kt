@@ -1,6 +1,6 @@
 package com.pavel.rebrain.api.products
 
-import okhttp3.ResponseBody
+import com.pavel.rebrain.service.response.ProductResponse
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -9,5 +9,5 @@ import retrofit2.http.GET
  */
 interface Api {
     @GET("products")
-    fun getProducts(): Call<ResponseBody>
+    fun getProducts(): Call<ProductResponse>
 }

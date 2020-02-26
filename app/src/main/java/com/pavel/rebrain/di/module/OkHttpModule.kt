@@ -2,12 +2,12 @@ package com.pavel.rebrain.di.module
 
 import com.pavel.rebrain.App
 import com.pavel.rebrain.di.scope.PerApplication
+import com.pavel.rebrain.di.util.Constants
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import okhttp3.ResponseBody
 import timber.log.Timber
 import javax.inject.Named
 
@@ -29,9 +29,9 @@ class OkHttpModule {
      * предоставляет base url
      */
     @Provides
-    @Named("baseUrl")
+    @Named(Constants.NAMED_BASE_URL)
     @PerApplication
-    fun provideBaseUrl(): String = "http://api.android.srwx.net/api/v2"
+    fun provideBaseUrl(): String = "http://api.android.srwx.net/api/v2/"
 
     /**
      * интерцептор запросов к api для логирования

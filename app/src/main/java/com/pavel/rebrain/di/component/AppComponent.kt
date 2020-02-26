@@ -14,7 +14,8 @@ import dagger.Component
         ProductModeStorageModule::class,
         AppAuthStorageModule::class,
         FavoritesRepositoryModule::class,
-        OkHttpModule::class
+        OkHttpModule::class,
+        RetrofitModule::class
     ]
 )
 @PerApplication

@@ -14,6 +14,7 @@ ext{
     anko_version='0.10.8'
     lifecycle_extensions_version='2.1.0'
     okhttp_version='4.3.1'
+    retrofit_version='2.5.0'
     junitVersion='4.12'
     testRunnerVersion='1.1.1'
     testEspressoCoreVersion='3.1.1'

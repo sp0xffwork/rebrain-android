@@ -1,17 +1,17 @@
 package com.pavel.rebrain.repository
 
 import com.pavel.rebrain.App
-import com.pavel.rebrain.api.products.Api
+import com.pavel.rebrain.api.ApiProducts
 import com.pavel.rebrain.domain.Product
 import com.pavel.rebrain.domain.util.Generator
-import com.pavel.rebrain.service.response.ProductResponse
+import com.pavel.rebrain.service.response.ProductListResponse
 import timber.log.Timber
 import javax.inject.Inject
 
 /**
  * класс логики формирования и хранения данных
  */
-class ProductsRepository @Inject constructor(private val api: Api) {
+class ProductsRepository @Inject constructor(private val apiProducts: ApiProducts) {
 
     private var productList: MutableList<Product> = mutableListOf()
 
@@ -28,22 +28,22 @@ class ProductsRepository @Inject constructor(private val api: Api) {
      */
     fun updateProducts(): MutableList<Product> {
         // асинхронный запрос к api
-        api.getProducts().enqueue(
-            object : retrofit2.Callback<ProductResponse> {
-                override fun onFailure(call: retrofit2.Call<ProductResponse>, t: Throwable) {
+        apiProducts.getProducts(isFavorite = false).enqueue(
+            object : retrofit2.Callback<ProductListResponse> {
+                override fun onFailure(call: retrofit2.Call<ProductListResponse>, t: Throwable) {
                     Timber.tag(App.APP_LOG_TAG).i("getProducts.enqueue error is: %s", t.message)
                 }
 
                 override fun onResponse(
-                    call: retrofit2.Call<ProductResponse>,
-                    response: retrofit2.Response<ProductResponse>
+                    call: retrofit2.Call<ProductListResponse>,
+                    response: retrofit2.Response<ProductListResponse>
                 ) {
                     val message = if (response.code() > 200) {
                         response.errorBody()?.string()
                     } else {
-                        val productResponse = response.body()
-                        val productDomain = productResponse?.convertToDomainModel()
-                        productDomain?.id ?: ""
+                        val productListResponse = response.body()
+                        val productListDomain = productListResponse?.convertToDomainModel()
+                        "Product list size = ${productListDomain?.items?.size ?: 0}"
                     }
 
                     Timber.tag(App.APP_LOG_TAG)

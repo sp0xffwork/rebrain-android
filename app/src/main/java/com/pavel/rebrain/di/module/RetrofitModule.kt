@@ -1,15 +1,16 @@
 package com.pavel.rebrain.di.module
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.pavel.rebrain.api.products.Api
+import com.pavel.rebrain.api.ApiAuth
+import com.pavel.rebrain.api.ApiCart
+import com.pavel.rebrain.api.ApiProducts
+import com.pavel.rebrain.api.ApiUser
 import com.pavel.rebrain.di.scope.PerApplication
 import com.pavel.rebrain.di.util.Constants
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Named
 
 /**
@@ -23,24 +24,47 @@ class RetrofitModule {
     @Provides
     @PerApplication
     fun provideRetrofit(okHttpClient: OkHttpClient, @Named(Constants.NAMED_BASE_URL) baseUrl: String): Retrofit {
-        val gson: Gson = GsonBuilder()
-            .setPrettyPrinting()
-            .create()
-
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
     }
 
     /**
-     * предоставляет API
+     * предоставляет API Auth
      */
     @Provides
     @PerApplication
-    fun provideApi(retrofit: Retrofit): Api {
-        return retrofit.create(Api::class.java)
+    fun provideApiAuh(retrofit: Retrofit): ApiAuth {
+        return retrofit.create(ApiAuth::class.java)
+    }
+
+    /**
+     * предоставляет API Cart
+     */
+    @Provides
+    @PerApplication
+    fun provideApiCart(retrofit: Retrofit): ApiCart {
+        return retrofit.create(ApiCart::class.java)
+    }
+
+    /**
+     * предоставляет API Products
+     */
+    @Provides
+    @PerApplication
+    fun provideApiProducts(retrofit: Retrofit): ApiProducts {
+        return retrofit.create(ApiProducts::class.java)
+    }
+
+    /**
+     * предоставляет API User
+     */
+    @Provides
+    @PerApplication
+    fun provideApiUser(retrofit: Retrofit): ApiUser {
+        return retrofit.create(ApiUser::class.java)
     }
 
 }

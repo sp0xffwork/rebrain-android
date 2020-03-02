@@ -77,7 +77,7 @@ class FavoritesRecyclerViewAdapter(
             Glide
                 .with(parent.context)
                 .load(
-                    when (data.pictureId) {
+                    when (data.id % 4) {
                         0 -> R.drawable.pic_1
                         1 -> R.drawable.pic_2
                         2 -> R.drawable.pic_3

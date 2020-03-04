@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "730530873902",
+    "firebase_url": "https://rebrain-6d21a.firebaseio.com",
+    "project_id": "rebrain-6d21a",
+    "storage_bucket": "rebrain-6d21a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730530873902:android:c3a73e9ac2108a6bfd15bf",
+        "android_client_info": {
+          "package_name": "com.pavel.rebrain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730530873902-ad286ncu9n65vbvesr8659uuaf9ae7p1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pavel.rebrain",
+            "certificate_hash": "4e0560db44905119847fc2fa554a7fcb103559e4"
+          }
+        },
+        {
+          "client_id": "730530873902-2i4u2cp6n52htpvkkh98m5fcc5b2qlrr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgjrRFlfRCZyaA9hoN8srhd7lGPIkFsYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730530873902-2i4u2cp6n52htpvkkh98m5fcc5b2qlrr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

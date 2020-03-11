@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.View
 import com.pavel.rebrain.App
 import com.pavel.rebrain.R
-import com.pavel.rebrain.di.component.DaggerAppComponent
-import com.pavel.rebrain.di.module.AppModule
 import com.pavel.rebrain.screen.base.BaseActivity
 import com.pavel.rebrain.screen.intro.IntroActivity
 import com.pavel.rebrain.screen.main.MainActivity
@@ -15,6 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -41,6 +40,15 @@ class SplashActivity : BaseActivity("SplashActivity"), CoroutineScope {
         // если sdk < 19, то fullscreen. в остальных случаях прозрачный Status Bar заданный в настройках стиля
         if (Build.VERSION.SDK_INT < 19) {
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        }
+
+        // сюда будет доставляться payload из пуш-уведомления (после клика), если приложение было в фоне
+        // или не запущено
+        if (intent.extras != null) {
+            for (key in intent.extras.keySet()) {
+                val value = intent.extras[key]
+                Timber.tag(App.APP_LOG_TAG).i("Key: $key Value: $value")
+            }
         }
 
         launch {

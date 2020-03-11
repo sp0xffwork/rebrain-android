@@ -6,6 +6,8 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.pavel.rebrain.R
 import com.pavel.rebrain.screen.base.BaseActivity
 import com.pavel.rebrain.screen.base.BaseFragment
@@ -48,6 +50,16 @@ class MainActivity : BaseActivity("MainActivity"), OnFragmentInteractionListener
             bottomBar.setCheckedButton(BottomBar.MainTabType.MAIN)
             setFragment(FragmentType.MAIN)
         }
+
+        // запрос текущего fcm токена
+        FirebaseInstanceId.getInstance()
+            .instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    return@OnCompleteListener
+                }
+                val token = task.result?.token
+            })
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
